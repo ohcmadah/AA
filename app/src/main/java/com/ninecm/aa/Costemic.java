@@ -2,12 +2,12 @@ package com.ninecm.aa;
 
 public class Costemic {
     private String title;
-    private int endDay;
-    private int openDay;
+    private String endDay;
+    private String openDay;
     private String memo;
     private int star;
 
-    public Costemic(String title, int endDay, int openDay, String memo, int star) {
+    public Costemic(String title, String endDay, String openDay, String memo, int star) {
         this.title = title;
         this.endDay = endDay;
         this.openDay = openDay;
@@ -23,19 +23,19 @@ public class Costemic {
         this.title = title;
     }
 
-    public int getEndDay() {
+    public String getEndDay() {
         return endDay;
     }
 
-    public void setEndDay(int endDay) {
+    public void setEndDay(String endDay) {
         this.endDay = endDay;
     }
 
-    public int getOpenDay() {
+    public String getOpenDay() {
         return openDay;
     }
 
-    public void setOpenDay(int openDay) {
+    public void setOpenDay(String openDay) {
         this.openDay = openDay;
     }
 
@@ -45,5 +45,13 @@ public class Costemic {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
     }
 }
