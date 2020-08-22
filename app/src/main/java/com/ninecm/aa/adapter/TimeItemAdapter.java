@@ -1,5 +1,6 @@
 package com.ninecm.aa.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Costemic;
 import com.ninecm.aa.R;
 
@@ -55,9 +57,16 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
             holder.divider.setVisibility(View.GONE);
         }
 
+        int year = Calculator.getYear(costemics.get(position).getEndDay());
+        int month = Calculator.getMonth(costemics.get(position).getEndDay());
+        int day = Calculator.getDay(costemics.get(position).getEndDay());
+        Calculator calculator = new Calculator(year, month, day);
+
+        String dDay = "D - " + String.valueOf(calculator.calDday());
         String title = costemics.get(position).getTitle();
+
         holder.timeTitle.setText(title);
-        holder.timeDday.setText("D - 2");
+        holder.timeDday.setText(dDay);
     }
 
     @Override
