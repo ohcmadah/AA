@@ -17,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private MainAdapterPager adapterPager;
+    private TimeItemAdapter timeItemAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private RecyclerView timeRecyclerView;
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         setUp();
+    }
+
+    private  void init() {
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        timeRecyclerView = (RecyclerView) findViewById(R.id.time_recyclerview);
+        list = new ArrayList<>();
     }
 
     private void setUp() {
@@ -50,16 +58,9 @@ public class MainActivity extends AppCompatActivity {
         list.add("");
         list.add("");
 
-        TimeItemAdapter timeItemAdapter = new TimeItemAdapter(list);
+        timeItemAdapter = new TimeItemAdapter(list);
         timeRecyclerView.setAdapter(timeItemAdapter);
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private  void init() {
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        timeRecyclerView = (RecyclerView) findViewById(R.id.time_recyclerview);
-        list = new ArrayList<>();
     }
 
     TabLayout.OnTabSelectedListener changePages = new TabLayout.OnTabSelectedListener() {
