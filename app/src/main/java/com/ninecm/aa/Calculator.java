@@ -10,28 +10,28 @@ public class Calculator {
         endCalendar.set(EndYear, EndMonth, EndDay);
     }
 
-    public int getYear(String date) {
+    public static int getYear(String date) {
         int year;
         year = Integer.parseInt(date.substring(0, 4));
 
         return year;
     }
 
-    public int getMonth(String date) {
+    public static int getMonth(String date) {
         int month;
         month = Integer.parseInt(date.substring(6, 8));
 
         return month;
     }
 
-    public int getDay(String date) {
+    public static int getDay(String date) {
         int day;
         day = Integer.parseInt(date.substring(10, 12));
 
         return day;
     }
 
-    public String oneToTwo(int notKnow) {
+    public static String oneToTwo(int notKnow) {
         String result = String.valueOf(notKnow);
         if (result.length() == 1) {
             result = "0" + result;
