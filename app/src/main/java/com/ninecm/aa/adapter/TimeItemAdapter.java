@@ -4,31 +4,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ninecm.aa.Costemic;
 import com.ninecm.aa.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeItemViewHolder> {
 
-    private List<String> list;
+    private ArrayList<Costemic> costemics;
 
     public static class TimeItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout timeItem;
         View divider;
+        TextView timeTitle;
+        TextView timeDday;
 
         public TimeItemViewHolder(View v) {
             super(v);
-            timeItem = v.findViewById(R.id.time_item_container);
-            divider = v.findViewById(R.id.divider);
+            timeItem = (LinearLayout) v.findViewById(R.id.time_item_container);
+            divider = (View) v.findViewById(R.id.divider);
+            timeTitle = (TextView) v.findViewById(R.id.time_title);
+            timeDday = (TextView) v.findViewById(R.id.time_dday);
         }
     }
 
-    public TimeItemAdapter(List<String> list) {
-        this.list = list;
+    public TimeItemAdapter(ArrayList<Costemic> costemics) {
+        this.costemics = costemics;
     }
 
     @NonNull
@@ -44,15 +50,19 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_top);
         }
 
-        if (position == list.size() - 1) {
+        if (position == costemics.size() - 1) {
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_bottom);
             holder.divider.setVisibility(View.GONE);
         }
+
+        String title = costemics.get(position).getTitle();
+        holder.timeTitle.setText(title);
+        holder.timeDday.setText("D - 2");
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return costemics.size();
     }
 
 }

@@ -28,15 +28,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:text="스킨"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/time_dday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey"
-                    android:text="D - 18"/>
+                    android:textColor="@color/grey" />
 
             </LinearLayout>
 
