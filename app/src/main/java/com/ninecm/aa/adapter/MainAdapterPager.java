@@ -1,6 +1,7 @@
 package com.ninecm.aa.adapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -9,10 +10,13 @@ import com.ninecm.aa.fragment.RankingFragment;
 import com.ninecm.aa.fragment.TimeFragment;
 
 public class MainAdapterPager extends FragmentStatePagerAdapter {
-    public static final int COUNT = 2;
+    private int count;
 
-    public MainAdapterPager(@NonNull FragmentManager fm) {
-        super(fm);
+    private String[] tabTitles = new String[]{"TIME", "RANKING"};
+
+    public MainAdapterPager(@NonNull FragmentManager fm, int count) {
+        super(fm, count);
+        this.count = count;
     }
 
     @NonNull
@@ -25,12 +29,19 @@ public class MainAdapterPager extends FragmentStatePagerAdapter {
             case 1:
                 RankingFragment rankingFragment = new RankingFragment();
                 return rankingFragment;
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override
     public int getCount() {
-        return COUNT;
+        return count;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
     }
 }
