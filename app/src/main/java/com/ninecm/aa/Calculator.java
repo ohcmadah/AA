@@ -7,7 +7,7 @@ public class Calculator {
 
     public Calculator(int EndYear, int EndMonth, int EndDay) {
         endCalendar = Calendar.getInstance();
-        endCalendar.set(EndYear, EndMonth, EndDay);
+        endCalendar.set(EndYear, EndMonth - 1, EndDay);
     }
 
     public static int getYear(String date) {
@@ -47,6 +47,6 @@ public class Calculator {
         long currDate = today.getTimeInMillis() / 86400000;
 
         long count = endDate - currDate;
-        return (int) count + 1;
+        return (int) count;
     }
 }
