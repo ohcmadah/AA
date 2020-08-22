@@ -30,7 +30,7 @@ public class TimeFragment extends Fragment {
 
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
 
-        Costemic costemic = new Costemic("에뛰드 스킨", "2020년 8월 26일 (수)", "2020년 8월 23일 (일)", "없음", 2);
+        Costemic costemic = new Costemic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
         costemics = new ArrayList<>();
         costemics.add(costemic);
         costemics.add(costemic);
