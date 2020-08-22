@@ -23,7 +23,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.ItemVi
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.id.time_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.time_item, viewGroup, false);
         return new ItemViewHolder(view);
     }
 
@@ -50,7 +50,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.ItemVi
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            timeItem = itemView.findViewById(R.id.time_item);
+            timeItem = itemView.findViewById(R.id.time_item_container);
             divider = itemView.findViewById(R.id.divider);
         }
     }
