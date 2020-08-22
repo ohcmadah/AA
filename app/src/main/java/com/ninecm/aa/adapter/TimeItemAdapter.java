@@ -16,6 +16,17 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
     private List<String> list;
 
+    public static class TimeItemViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout timeItem;
+        View divider;
+
+        public TimeItemViewHolder(View v) {
+            super(v);
+            timeItem = v.findViewById(R.id.time_item_container);
+            divider = v.findViewById(R.id.divider);
+        }
+    }
+
     public TimeItemAdapter(List<String> list) {
         this.list = list;
     }
@@ -42,17 +53,6 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    class TimeItemViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout timeItem;
-        View divider;
-
-        public TimeItemViewHolder(View v) {
-            super(v);
-            timeItem = v.findViewById(R.id.time_item_container);
-            divider = v.findViewById(R.id.divider);
-        }
     }
 
 }
