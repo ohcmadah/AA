@@ -17,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private MainAdapterPager adapterPager;
-    private TimeItemAdapter timeItemAdapter;
+    private RecyclerView.Adapter timeItemAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private RecyclerView timeRecyclerView;
