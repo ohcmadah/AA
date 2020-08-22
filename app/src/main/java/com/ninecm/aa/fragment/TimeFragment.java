@@ -35,6 +35,8 @@ public class TimeFragment extends Fragment {
         costemics.add(costemic);
         costemics.add(costemic);
         costemics.add(costemic);
+        costemics.add(costemic);
+        costemics.add(costemic);
 
         timeItemAdapter = new TimeItemAdapter(costemics);
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
