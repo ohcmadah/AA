@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.TimeItemAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimeFragment extends Fragment {
@@ -27,6 +28,7 @@ public class TimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
+        list = new ArrayList<>();
         list.add("");
         list.add("");
         list.add("");
