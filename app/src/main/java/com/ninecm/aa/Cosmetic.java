@@ -1,13 +1,13 @@
 package com.ninecm.aa;
 
-public class Costemic {
+public class Cosmetic {
     private String title;
     private String endDay;
     private String openDay;
     private String memo;
     private int star;
 
-    public Costemic(String title, String endDay, String openDay, String memo, int star) {
+    public Cosmetic(String title, String endDay, String openDay, String memo, int star) {
         this.title = title;
         this.endDay = endDay;
         this.openDay = openDay;

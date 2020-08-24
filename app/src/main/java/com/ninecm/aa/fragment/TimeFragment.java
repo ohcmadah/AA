@@ -11,17 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ninecm.aa.Costemic;
+import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.TimeItemAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TimeFragment extends Fragment {
     private RecyclerView timeRecyclerView;
     private TimeItemAdapter timeItemAdapter;
-    private ArrayList<Costemic> costemics;
+    private ArrayList<Cosmetic> cosmetics;
 
     @Nullable
     @Override
@@ -30,15 +29,15 @@ public class TimeFragment extends Fragment {
 
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
 
-        Costemic costemic = new Costemic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
-        costemics = new ArrayList<>();
-        costemics.add(costemic);
-        costemics.add(costemic);
-        costemics.add(costemic);
-        costemics.add(costemic);
-        costemics.add(costemic);
+        Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
+        cosmetics = new ArrayList<>();
+        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic);
 
-        timeItemAdapter = new TimeItemAdapter(costemics);
+        timeItemAdapter = new TimeItemAdapter(cosmetics);
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         timeRecyclerView.setAdapter(timeItemAdapter);
 

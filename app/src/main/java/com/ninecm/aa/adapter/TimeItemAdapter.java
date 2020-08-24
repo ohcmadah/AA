@@ -1,6 +1,5 @@
 package com.ninecm.aa.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninecm.aa.Calculator;
-import com.ninecm.aa.Costemic;
+import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.R;
 
 import java.util.ArrayList;
 
 public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeItemViewHolder> {
 
-    private ArrayList<Costemic> costemics;
+    private ArrayList<Cosmetic> cosmetics;
 
     public static class TimeItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout timeItem;
@@ -35,8 +34,8 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         }
     }
 
-    public TimeItemAdapter(ArrayList<Costemic> costemics) {
-        this.costemics = costemics;
+    public TimeItemAdapter(ArrayList<Cosmetic> cosmetics) {
+        this.cosmetics = cosmetics;
     }
 
     @NonNull
@@ -52,18 +51,18 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_top);
         }
 
-        if (position == costemics.size() - 1) {
+        if (position == cosmetics.size() - 1) {
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_bottom);
             holder.divider.setVisibility(View.GONE);
         }
 
-        int year = Calculator.getYear(costemics.get(position).getEndDay());
-        int month = Calculator.getMonth(costemics.get(position).getEndDay());
-        int day = Calculator.getDay(costemics.get(position).getEndDay());
+        int year = Calculator.getYear(cosmetics.get(position).getEndDay());
+        int month = Calculator.getMonth(cosmetics.get(position).getEndDay());
+        int day = Calculator.getDay(cosmetics.get(position).getEndDay());
         Calculator calculator = new Calculator(year, month, day);
 
         String dDay = "D - " + String.valueOf(calculator.calDday());
-        String title = costemics.get(position).getTitle();
+        String title = cosmetics.get(position).getTitle();
 
         holder.timeTitle.setText(title);
         holder.timeDday.setText(dDay);
@@ -71,7 +70,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
     @Override
     public int getItemCount() {
-        return costemics.size();
+        return cosmetics.size();
     }
 
 }
