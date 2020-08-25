@@ -24,16 +24,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private  void init() {
+        // activity_main.xml에 <ViewPager>
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        // activity_main.xml에 <TabLayout>
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
     }
 
     private void setUp() {
+        // tabLayout을 viewPager와 함께 동작(연동)
         tabLayout.setupWithViewPager(viewPager);
 
+        // viewPager에 Adapter 연결
         adapterPager = new MainAdapterPager(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapterPager);
 
+        // 메뉴 클릭 시 actionListener 추가
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(changePages);
     }

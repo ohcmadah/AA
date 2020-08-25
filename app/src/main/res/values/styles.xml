@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- TabLayout Custom Text -->
     <style name="CustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>

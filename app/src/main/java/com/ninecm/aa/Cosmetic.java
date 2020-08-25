@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+/* 관리할 품목 클래스 */
 public class Cosmetic {
     private String title;
     private String endDay;
@@ -7,6 +8,7 @@ public class Cosmetic {
     private String memo;
     private int star;
 
+    // Constructor
     public Cosmetic(String title, String endDay, String openDay, String memo, int star) {
         this.title = title;
         this.endDay = endDay;
@@ -15,6 +17,7 @@ public class Cosmetic {
         this.star = star;
     }
 
+    // getter and setter
     public String getTitle() {
         return title;
     }

@@ -61,13 +61,13 @@
     </LinearLayout>
 
     <!-- section -->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="147dp"/>
 
+    <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_plus"
         app:layout_anchor="@id/viewpager"

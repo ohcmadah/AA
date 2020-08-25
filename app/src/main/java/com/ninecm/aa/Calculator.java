@@ -2,14 +2,18 @@ package com.ninecm.aa;
 
 import java.util.Calendar;
 
+/* 필요한 변환 혹은 계산을 담은 클래스 */
 public class Calculator {
     private Calendar endCalendar;
 
+    // Constructor
     public Calculator(int EndYear, int EndMonth, int EndDay) {
+        // 유통기한으로 날짜 설정
         endCalendar = Calendar.getInstance();
         endCalendar.set(EndYear, EndMonth - 1, EndDay);
     }
 
+    // 문자열 yyyymmdd로부터 연도를 가져옴
     public static int getYear(String date) {
         int year;
         year = Integer.parseInt(date.substring(0, 4));
@@ -17,6 +21,7 @@ public class Calculator {
         return year;
     }
 
+    // 문자열 yyyymmdd로부터 달을 가져옴
     public static int getMonth(String date) {
         int month;
         month = Integer.parseInt(date.substring(4, 6));
@@ -24,6 +29,7 @@ public class Calculator {
         return month;
     }
 
+    // 문자열 yyyymmdd로부터 날짜를 가져옴
     public static int getDay(String date) {
         int day;
         day = Integer.parseInt(date.substring(6, 8));
@@ -31,6 +37,7 @@ public class Calculator {
         return day;
     }
 
+    // 날짜나 달이 1글자인지 2글자인지 판별해 포맷을 맞춤
     public static String oneToTwo(int notKnow) {
         String result = String.valueOf(notKnow);
         if (result.length() == 1) {
@@ -40,8 +47,11 @@ public class Calculator {
         return result;
     }
 
+    // D-Day 계산
     public int calDday() {
+        // 휴대폰의 날짜를 기준으로 calendar 생성
         Calendar today = Calendar.getInstance();
+
         // 86400000 == 1일
         long endDate = endCalendar.getTimeInMillis() / 86400000;
         long currDate = today.getTimeInMillis() / 86400000;

@@ -25,6 +25,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         TextView timeTitle;
         TextView timeDday;
 
+        // Constructor
         public TimeItemViewHolder(View v) {
             super(v);
             timeItem = (LinearLayout) v.findViewById(R.id.time_item_container);
@@ -34,6 +35,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         }
     }
 
+    // Constructor
     public TimeItemAdapter(ArrayList<Cosmetic> cosmetics) {
         this.cosmetics = cosmetics;
     }
@@ -47,27 +49,37 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
     @Override
     public void onBindViewHolder(@NonNull TimeItemViewHolder holder, int position) {
+        // 첫 번째 목록일 때
         if (position == 0) {
+            // 위쪽 모서리 둥근 사각형으로 배경 설정
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_top);
         }
 
+        // 마지막 목록일 때
         if (position == cosmetics.size() - 1) {
+            // 아래쪽 모서리 둥근 사각형으로 배경 설정
             holder.timeItem.setBackgroundResource(R.drawable.round_corner_bottom);
+            // divider 안 보이도록 설정
             holder.divider.setVisibility(View.GONE);
         }
 
+        // 유통기한 가져와서 Calculator의 Calendar 생성
         int year = Calculator.getYear(cosmetics.get(position).getEndDay());
         int month = Calculator.getMonth(cosmetics.get(position).getEndDay());
         int day = Calculator.getDay(cosmetics.get(position).getEndDay());
         Calculator calculator = new Calculator(year, month, day);
 
+        // D-Day 계산
         String dDay = "D - " + String.valueOf(calculator.calDday());
+        // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
 
+        // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.timeTitle.setText(title);
         holder.timeDday.setText(dDay);
     }
 
+    // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환
     @Override
     public int getItemCount() {
         return cosmetics.size();

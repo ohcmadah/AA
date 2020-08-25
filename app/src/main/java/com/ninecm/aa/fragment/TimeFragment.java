@@ -27,8 +27,10 @@ public class TimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
+        // RecyclerView를 가져옴
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
 
+        // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
@@ -37,8 +39,11 @@ public class TimeFragment extends Fragment {
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
 
+        // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(cosmetics);
+        // RecyclerView Manager를 LinearLayout으로 설정
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // RecyclerView Adapter 설정
         timeRecyclerView.setAdapter(timeItemAdapter);
 
         return view;
