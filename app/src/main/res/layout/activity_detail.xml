@@ -51,8 +51,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            >
+            android:layout_marginStart="47dp">
 
             <TextView
                 android:id="@+id/detail_title"
@@ -68,8 +67,7 @@
                 android:id="@+id/star_container"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -106,58 +104,61 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-
-                        android:layout_marginBottom="31dp"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="16dp"
-                            android:src="@drawable/circle_icon"/>
-
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:src="@drawable/circle_icon"/>
 
                             <TextView
                                 android:id="@+id/open_day"
+                                android:layout_marginStart="9dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="개봉일"
                                 android:textColor="@color/white"
                                 android:textSize="21sp" />
 
-                            <TextView
-                                android:layout_marginTop="17dp"
-                                android:id="@+id/open_date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2020년 8월 20일 (목)"
-                                android:textColor="@color/white"
-                                android:textSize="21sp"/>
-
                         </LinearLayout>
+
+                        <TextView
+                            android:layout_marginBottom="31dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginStart="35dp"
+                            android:id="@+id/open_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2020년 8월 20일 (목)"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"/>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginBottom="31dp"
-                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="16dp"
-                            android:src="@drawable/circle_icon"/>
-
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:src="@drawable/circle_icon"/>
+
                             <TextView
+                                android:layout_marginStart="9dp"
                                 android:id="@+id/end_day"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -165,34 +166,38 @@
                                 android:textColor="@color/white"
                                 android:textSize="21sp" />
 
-                            <TextView
-                                android:layout_marginTop="17dp"
-                                android:id="@+id/end_date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2020년 8월 20일 (목)"
-                                android:textColor="@color/white"
-                                android:textSize="21sp"/>
-
                         </LinearLayout>
+
+                        <TextView
+                            android:layout_marginBottom="31dp"
+                            android:layout_marginTop="17dp"
+                            android:layout_marginStart="35dp"
+                            android:id="@+id/end_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2020년 8월 20일 (목)"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"/>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="16dp"
-                            android:src="@drawable/circle_icon"/>
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="16dp"
+                                android:src="@drawable/circle_icon"/>
+
                             <TextView
+                                android:layout_marginStart="9dp"
                                 android:id="@+id/add_memo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -200,16 +205,17 @@
                                 android:textColor="@color/white"
                                 android:textSize="21sp" />
 
-                            <TextView
-                                android:layout_marginTop="17dp"
-                                android:id="@+id/memo_contents"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="내용"
-                                android:textColor="@color/white"
-                                android:textSize="21sp"/>
-
                         </LinearLayout>
+
+                        <TextView
+                            android:layout_marginTop="17dp"
+                            android:layout_marginStart="35dp"
+                            android:id="@+id/memo_contents"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="내용"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"/>
 
                     </LinearLayout>
 
