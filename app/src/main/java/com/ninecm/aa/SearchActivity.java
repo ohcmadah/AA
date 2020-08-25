@@ -1,6 +1,7 @@
 package com.ninecm.aa;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 public class SearchActivity extends AppCompatActivity {
