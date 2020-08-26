@@ -44,7 +44,7 @@
 
     <!-- list -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/star_recyclerview"
+        android:id="@+id/ranking_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
