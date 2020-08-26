@@ -4,15 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- chip navigation -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="12dp">
 
         <ImageButton
             android:id="@+id/btn_three_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:layout_marginEnd="8dp"
             android:focusableInTouchMode="true"
             android:background="@color/transparent"
             android:src="@drawable/btn_three_star_selector"/>
@@ -22,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
+            android:layout_marginEnd="8dp"
             android:focusableInTouchMode="true"
             android:background="@color/transparent"
             android:src="@drawable/btn_two_star_selector"/>
@@ -36,5 +41,15 @@
             android:src="@drawable/btn_one_star_selector"/>
 
     </LinearLayout>
+
+    <!-- list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/star_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginBottom="26dp" />
 
 </LinearLayout>
