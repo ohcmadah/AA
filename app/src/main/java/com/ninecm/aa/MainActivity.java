@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.ninecm.aa.adapter.MainAdapterPager;
 
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapterPager adapterPager;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.time_viewpager);
         // activity_main.xml에 <TabLayout>
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        // FAB
+        fab = (FloatingActionButton) findViewById(R.id.btn_plus);
     }
 
     private void setUp() {
@@ -47,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             viewPager.setCurrentItem(tab.getPosition());
+
+            if (tab.getPosition() == 1) {
+                fab.setVisibility(View.INVISIBLE);
+            } else {
+                fab.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
