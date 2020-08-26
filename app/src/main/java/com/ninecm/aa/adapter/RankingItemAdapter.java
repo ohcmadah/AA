@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.R;
 
@@ -21,14 +20,14 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
     public static class RankingItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout rankingItemContainer;
-        View ranking_divider;
+        View rankingDivider;
         TextView rankingTitle;
 
         // Constructor
         public RankingItemViewHolder(View v) {
             super(v);
             rankingItemContainer = (LinearLayout) v.findViewById(R.id.ranking_item_container);
-            ranking_divider = (View) v.findViewById(R.id.ranking_divider);
+            rankingDivider = (View) v.findViewById(R.id.ranking_divider);
             rankingTitle = (TextView) v.findViewById(R.id.ranking_title);
         }
     }
@@ -58,7 +57,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
             // 아래쪽 모서리 둥근 사각형으로 배경 설정
             holder.rankingItemContainer.setBackgroundResource(R.drawable.blue_round_corner_bottom);
             // divider 안 보이도록 설정
-            holder.ranking_divider.setVisibility(View.GONE);
+            holder.rankingDivider.setVisibility(View.GONE);
         }
 
         // 물품 제목 가져옴
