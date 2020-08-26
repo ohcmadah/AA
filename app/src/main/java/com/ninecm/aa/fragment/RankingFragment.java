@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.RankingItemAdapter;
@@ -21,6 +23,8 @@ public class RankingFragment extends Fragment {
 
     private RecyclerView rankingRecyclerView;
     private RankingItemAdapter rankingItemAdapter;
+    private ImageButton btnThreeStar;
+
     private ArrayList<Cosmetic> cosmetics;
 
     @Nullable
@@ -28,12 +32,17 @@ public class RankingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ranking_fragment, container, false);
 
-        // RecyclerView를 가져옴
+        // init
         rankingRecyclerView = (RecyclerView) view.findViewById(R.id.ranking_recyclerview);
+        btnThreeStar = (ImageButton) view.findViewById(R.id.btn_three_star);
+
+        btnThreeStar.setPressed(true);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
         cosmetics = new ArrayList<>();
+        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
