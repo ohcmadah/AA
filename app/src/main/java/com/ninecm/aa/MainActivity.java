@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private  void init() {
         // activity_main.xml에 <ViewPager>
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.time_viewpager);
         // activity_main.xml에 <TabLayout>
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
     }
