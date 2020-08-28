@@ -45,7 +45,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
-        holder.searchItemContainer.setBackgroundResource(R.drawable.search_item_rect);
+
     }
 
     @Override
