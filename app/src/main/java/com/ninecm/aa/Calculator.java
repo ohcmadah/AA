@@ -59,4 +59,18 @@ public class Calculator {
         long count = endDate - currDate;
         return (int) count;
     }
+
+    // D-Day 계산 결과에 따른 문자열 반환
+    public String stringDday(int dDay) {
+        String result;
+        if (dDay == 0) {
+            result = "유통기한이 오늘까지입니다.";
+        } else if (dDay > 0) {
+            result = String.valueOf(dDay);
+        } else {
+            result = "유통기한이 "+Math.abs(dDay)+"일 지났습니다.";
+        }
+
+        return result;
+    }
 }
