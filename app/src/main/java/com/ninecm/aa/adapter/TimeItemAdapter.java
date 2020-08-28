@@ -70,7 +70,8 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         Calculator calculator = new Calculator(year, month, day);
 
         // D-Day 계산
-        String dDay = "D - " + String.valueOf(calculator.calDday());
+        int dCount = calculator.calDday();
+        String dDay = calculator.stringDday(dCount);
         // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
 

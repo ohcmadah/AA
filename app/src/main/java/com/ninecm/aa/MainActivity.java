@@ -3,8 +3,10 @@ package com.ninecm.aa;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
+    private ImageButton btnSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private  void init() {
-        // activity_main.xml에 <ViewPager>
         viewPager = (ViewPager) findViewById(R.id.time_viewpager);
-        // activity_main.xml에 <TabLayout>
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        // FAB
         fab = (FloatingActionButton) findViewById(R.id.btn_plus);
+        btnSearch = (ImageButton) findViewById(R.id.btn_search);
     }
 
     private void setUp() {
@@ -43,20 +44,24 @@ public class MainActivity extends AppCompatActivity {
         adapterPager = new MainAdapterPager(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapterPager);
 
-        // 메뉴 클릭 시 actionListener 추가
+        // 메뉴 클릭 ActionListener
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(changePages);
+        tabLayout.addOnTabSelectedListener(changePage);
+
+        // 검색 버튼 클릭 ActionListener
+        btnSearch.setOnClickListener(goSearchPage);
     }
 
-    TabLayout.OnTabSelectedListener changePages = new TabLayout.OnTabSelectedListener() {
+    // 상단 Navigation ActionListener
+    TabLayout.OnTabSelectedListener changePage = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             viewPager.setCurrentItem(tab.getPosition());
 
-            if (tab.getPosition() == 1) {
-                fab.setVisibility(View.INVISIBLE);
-            } else {
-                fab.setVisibility(View.VISIBLE);
+            if (tab.getPosition() == 1) { // RANKING이면
+                fab.setVisibility(View.INVISIBLE); // FAB INVISIBLE
+            } else { // TIME이면
+                fab.setVisibility(View.VISIBLE); // FAB VISIBLE
             }
         }
 
@@ -68,6 +73,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabReselected(TabLayout.Tab tab) {
 
+        }
+    };
+
+    // Search Button Click
+    View.OnClickListener goSearchPage = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            MainActivity.this.finish();
         }
     };
 }
