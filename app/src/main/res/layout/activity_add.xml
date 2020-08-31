@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +9,8 @@
     android:orientation="vertical"
     android:layout_marginTop="78dp"
     android:background="@drawable/add_rect">
+
+
 
 
     <RelativeLayout
@@ -24,6 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="23dp"
             android:text="취소"
+            android:clickable="true"
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
@@ -35,190 +39,202 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="23dp"
             android:text="확인"
+            android:clickable="true"
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
     </RelativeLayout>
 
-    <ScrollView
+<!--    <com.roacult.backdrop.BackdropLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="21dp"
-                    android:text="제품명"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="11dp"
-                    android:text="키스미 아이라이너"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <View
-                    android:background="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"/>
-
-            </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="600dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="21dp"
-                    android:text="개봉일"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="11dp"
-                    android:text="2020년 8월 20일 (목)"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <View
-                    android:background="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="21dp"
-                    android:text="유통기한"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="11dp"
-                    android:text="2020년 8월 20일 (목)"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-                <View
-                    android:background="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="34dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginEnd="38dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="21dp"
-                    android:text="별점"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginEnd="38dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:src="@drawable/empty_star_icon"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:src="@drawable/empty_star_icon"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:src="@drawable/empty_star_icon"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="38dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="21dp"
-                    android:text="추가메모"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <LinearLayout
-                    android:layout_width="332dp"
-                    android:layout_height="200dp"
-                    android:layout_marginBottom="40dp"
-                    android:background="@drawable/add_memo_rect">
-
-                    <EditText
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="17dp"
-                        android:layout_marginTop="17dp"
-                        android:layout_marginBottom="30dp"
-                        android:textSize="15sp"
-                        android:text="내용을 입력하세요."
-                        android:background="@null"/>
+                        android:layout_marginBottom="21dp"
+                        android:text="제품명"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="11dp"
+                        android:text="키스미 아이라이너"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <View
+                        android:background="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginEnd="38dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="21dp"
+                        android:text="개봉일"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="11dp"
+                        android:text="2020년 8월 20일 (목)"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <View
+                        android:background="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginEnd="38dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="21dp"
+                        android:text="유통기한"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="11dp"
+                        android:text="2020년 8월 20일 (목)"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <View
+                        android:background="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginEnd="38dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="21dp"
+                        android:text="별점"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/empty_star_icon"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/empty_star_icon"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:src="@drawable/empty_star_icon"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginEnd="38dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="21dp"
+                        android:text="추가메모"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="332dp"
+                        android:layout_height="200dp"
+                        android:layout_marginBottom="100dp"
+                        android:background="@drawable/add_memo_rect">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="17dp"
+                            android:layout_marginTop="17dp"
+                            android:background="@null"
+                            android:text="내용을 입력하세요."
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
 
-    </ScrollView>
-
+<!--    </com.roacult.backdrop.BackdropLayout>-->
 
 </LinearLayout>
