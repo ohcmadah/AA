@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.ninecm.aa.adapter.SearchItemAdapter;
-import com.ninecm.aa.adapter.TimeItemAdapter;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView searchRecyclerView;
     private ArrayList<Cosmetic> cosmetics;
     private SearchItemAdapter searchItemAdapter;
-
+    private TextView search_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +46,14 @@ public class SearchActivity extends AppCompatActivity {
     private void init() {
         // RecyclerView를 가져옴
         searchRecyclerView = (RecyclerView) findViewById(R.id.search_recyclerview);
+        TextView textView = (TextView) findViewById(R.id.search_cancel);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+               Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+               startActivity(intent);
+           }
+        });
     }
+
 }
