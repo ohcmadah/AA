@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -38,9 +37,8 @@ public class RankingFragment extends Fragment {
         // init
         init(view);
 
-        // setUp
+        // set up
         setUp();
-
 
         return view;
     }
