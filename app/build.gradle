@@ -22,6 +22,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -35,4 +41,6 @@ dependencies {
 
     /* RecyclerView */
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    implementation 'com.github.roiacult:BackdropLayout:2.2'
 }
