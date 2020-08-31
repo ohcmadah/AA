@@ -53,6 +53,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="취소"
+            android:clickable="true"
             android:textColor="@color/main"
             android:textSize="18sp" />
 
