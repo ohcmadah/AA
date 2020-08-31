@@ -2,8 +2,10 @@ package com.ninecm.aa.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -51,10 +53,17 @@ public class RankingFragment extends Fragment {
     }
 
     private void setUp() {
+        // 기본 메뉴로 설정(눌려짐)
+        btnThreeStar.setPressed(true);
+
         // 버튼 액션 리스너 추가
         btnThreeStar.setOnClickListener(goThreeStarMenu);
         btnTwoStar.setOnClickListener(goTwoStarMenu);
         btnOneStar.setOnClickListener(goOneStarMenu);
+
+        // 별 2, 3개 메뉴 누를 때 1개 메뉴 pressed 해제
+        btnTwoStar.setOnTouchListener(setThreeStarPressed);
+        btnOneStar.setOnTouchListener(setThreeStarPressed);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
@@ -75,6 +84,18 @@ public class RankingFragment extends Fragment {
         // RecyclerView Adapter 설정
         rankingRecyclerView.setAdapter(rankingItemAdapter);
     }
+
+    View.OnTouchListener setThreeStarPressed = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) return false;
+
+            if (event.getAction() != MotionEvent.ACTION_UP) return true;
+
+            btnThreeStar.setPressed(false);
+            return false;
+        }
+    };
 
     View.OnClickListener goThreeStarMenu = new View.OnClickListener() {
         @Override
