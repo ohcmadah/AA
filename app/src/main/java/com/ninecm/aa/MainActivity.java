@@ -102,13 +102,9 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener goAddPage = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(MainActivity.this, AddActivity.class);
-//            startActivity(intent);
-//            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-//            MainActivity.this.finish();
-
-            DialogFragment dialog = AddDialog.newInstance();
-            dialog.show(getSupportFragmentManager(), "add");
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0,0);
         }
     };
 }
