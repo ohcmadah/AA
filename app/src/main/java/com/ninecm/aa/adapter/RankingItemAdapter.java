@@ -1,5 +1,6 @@
 package com.ninecm.aa.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninecm.aa.Cosmetic;
+import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.RankingItemViewHolder> {
 
     private ArrayList<Cosmetic> cosmetics;
+    private Activity activity;
 
     public static class RankingItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout rankingItemContainer;
@@ -33,8 +36,9 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     }
 
     // Constructor
-    public RankingItemAdapter(ArrayList<Cosmetic> cosmetics) {
+    public RankingItemAdapter(ArrayList<Cosmetic> cosmetics, Activity activity) {
         this.cosmetics = cosmetics;
+        this.activity = activity;
     }
 
     @NonNull
@@ -65,6 +69,9 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.rankingTitle.setText(title);
+
+        // onClick event
+        holder.rankingItemContainer.setOnClickListener(new ItemClickListener(activity, 1));
     }
 
     // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환

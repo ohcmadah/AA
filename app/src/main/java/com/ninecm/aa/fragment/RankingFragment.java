@@ -1,5 +1,6 @@
 package com.ninecm.aa.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class RankingFragment extends Fragment {
 
+    private Activity mainActivity;
     private RecyclerView rankingRecyclerView;
     private RankingItemAdapter rankingItemAdapter;
     private ImageButton btnThreeStar;
@@ -28,6 +30,10 @@ public class RankingFragment extends Fragment {
     private ImageButton btnOneStar;
 
     private ArrayList<Cosmetic> cosmetics;
+
+    public RankingFragment(Activity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
 
     @Nullable
     @Override
@@ -76,7 +82,7 @@ public class RankingFragment extends Fragment {
         cosmetics.add(cosmetic);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
-        rankingItemAdapter = new RankingItemAdapter(cosmetics);
+        rankingItemAdapter = new RankingItemAdapter(cosmetics, mainActivity);
         // RecyclerView Manager를 LinearLayout으로 설정
         rankingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // RecyclerView Adapter 설정

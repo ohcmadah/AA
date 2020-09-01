@@ -1,5 +1,7 @@
 package com.ninecm.aa.adapter;
 
+import android.app.Activity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,16 +12,17 @@ import com.ninecm.aa.fragment.RankingFragment;
 import com.ninecm.aa.fragment.TimeFragment;
 
 public class MainAdapterPager extends FragmentStatePagerAdapter {
-    // 메뉴 갯수
     private int count;
+    private Activity mainActivity;
 
     // 메뉴에 들어갈 String 목록
     private String[] tabTitles = new String[]{"TIME", "RANKING"};
 
     // Constructor
-    public MainAdapterPager(@NonNull FragmentManager fm, int count) {
+    public MainAdapterPager(@NonNull FragmentManager fm, int count, Activity mainActivity) {
         super(fm, count);
         this.count = count;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
@@ -30,7 +33,7 @@ public class MainAdapterPager extends FragmentStatePagerAdapter {
                 TimeFragment timeFragment = new TimeFragment();
                 return timeFragment;
             case 1: // RANKING 선택 시
-                RankingFragment rankingFragment = new RankingFragment();
+                RankingFragment rankingFragment = new RankingFragment(mainActivity);
                 return rankingFragment;
             default:
                 return null;

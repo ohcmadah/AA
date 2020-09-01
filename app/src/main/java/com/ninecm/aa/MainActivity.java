@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         // viewPager에 Adapter 연결
-        adapterPager = new MainAdapterPager(getSupportFragmentManager(), tabLayout.getTabCount());
+        adapterPager = new MainAdapterPager(getSupportFragmentManager(), tabLayout.getTabCount(), this);
         viewPager.setAdapter(adapterPager);
 
         // 메뉴 클릭 ActionListener
