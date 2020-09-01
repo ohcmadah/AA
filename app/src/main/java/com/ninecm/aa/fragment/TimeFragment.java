@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,10 @@ import java.util.ArrayList;
 public class TimeFragment extends Fragment {
     private RecyclerView timeRecyclerView;
     private TimeItemAdapter timeItemAdapter;
+    private LinearLayout emergContainer;
+    private TextView emergTitle;
+    private TextView emergDday;
+
     private ArrayList<Cosmetic> cosmetics;
     private Activity mainActivity;
 
@@ -33,8 +39,9 @@ public class TimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
-        // RecyclerView를 가져옴
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
+        emergTitle = (TextView) view.findViewById(R.id.emerg_title);
+        emergDday = (TextView) view.findViewById(R.id.emerg_dday);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
@@ -44,6 +51,8 @@ public class TimeFragment extends Fragment {
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic);
+
+        // emergency 계산
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
