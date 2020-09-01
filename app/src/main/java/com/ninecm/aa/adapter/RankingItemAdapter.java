@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.RankingItemViewHolder> {
 
     private ArrayList<Cosmetic> cosmetics;
-    private Activity activity;
+    private Activity mainActivity;
 
     public static class RankingItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout rankingItemContainer;
@@ -36,9 +36,9 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     }
 
     // Constructor
-    public RankingItemAdapter(ArrayList<Cosmetic> cosmetics, Activity activity) {
+    public RankingItemAdapter(ArrayList<Cosmetic> cosmetics, Activity mainActivity) {
         this.cosmetics = cosmetics;
-        this.activity = activity;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
@@ -71,7 +71,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         holder.rankingTitle.setText(title);
 
         // onClick event
-        holder.rankingItemContainer.setOnClickListener(new ItemClickListener(activity, 1));
+        holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
     }
 
     // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환
