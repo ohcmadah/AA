@@ -80,5 +80,10 @@
         app:tint="@color/white"
         app:borderWidth="0dp"/>
 
+    <!-- 예제 따라하다 이칭구가 안없어져서 주석처리함 -->
+<!--    <include-->
+<!--        android:id="@+id/add"-->
+<!--        layout="@layout/activity_add"/>-->
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
