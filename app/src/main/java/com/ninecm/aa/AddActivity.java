@@ -49,12 +49,14 @@ public class AddActivity extends AppCompatActivity {
         picker = (DatePicker) findViewById(R.id.open_datePicker);
 
         btnGet=(Button)findViewById(R.id.open_button);
-        btnGet.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("MyTag", "Click");
-                    tvw.setText(picker.getYear() + "년 " + (picker.getMonth()+1) + "월 " + picker.getDayOfMonth() + "일");
-                }
-        });
+        btnGet.setOnClickListener(setTextEndDay);
     }
+
+    View.OnClickListener setTextEndDay = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d("MyTag", "Click");
+            tvw.setText(picker.getYear() + "년 " + (picker.getMonth()+1) + "월 " + picker.getDayOfMonth() + "일");
+        }
+    };
 }
