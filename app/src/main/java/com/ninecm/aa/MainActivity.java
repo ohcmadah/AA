@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SearchActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-            MainActivity.this.finish();
         }
     };
 
