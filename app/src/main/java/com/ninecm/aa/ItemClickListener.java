@@ -21,6 +21,5 @@ public class ItemClickListener implements View.OnClickListener {
         intent.putExtra("itemId", itemId);
 
         activity.startActivity(intent);
-        activity.finish();
     }
 }
