@@ -1,5 +1,6 @@
 package com.ninecm.aa.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,11 @@ public class TimeFragment extends Fragment {
     private RecyclerView timeRecyclerView;
     private TimeItemAdapter timeItemAdapter;
     private ArrayList<Cosmetic> cosmetics;
+    private Activity mainActivity;
+
+    public TimeFragment(Activity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
 
     @Nullable
     @Override
@@ -40,7 +46,7 @@ public class TimeFragment extends Fragment {
         cosmetics.add(cosmetic);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
-        timeItemAdapter = new TimeItemAdapter(cosmetics);
+        timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
         // RecyclerView Manager를 LinearLayout으로 설정
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // RecyclerView Adapter 설정
