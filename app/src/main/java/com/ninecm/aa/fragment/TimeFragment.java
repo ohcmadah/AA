@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninecm.aa.Cosmetic;
+import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.TimeItemAdapter;
 
@@ -40,6 +41,7 @@ public class TimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
+        emergContainer = (LinearLayout) view.findViewById(R.id.emerg_container);
         emergTitle = (TextView) view.findViewById(R.id.emerg_title);
         emergDday = (TextView) view.findViewById(R.id.emerg_dday);
 
@@ -60,6 +62,8 @@ public class TimeFragment extends Fragment {
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // RecyclerView Adapter 설정
         timeRecyclerView.setAdapter(timeItemAdapter);
+
+        emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
 
         return view;
     }
