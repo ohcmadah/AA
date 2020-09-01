@@ -22,11 +22,21 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url "https://jitpack.io"
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "https://maven.google.com"
+            name 'Google'
+        }
     }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -42,5 +52,6 @@ dependencies {
     /* RecyclerView */
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+    /* backdrop */
     implementation 'com.github.roiacult:BackdropLayout:2.2'
 }

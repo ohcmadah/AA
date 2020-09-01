@@ -34,15 +34,19 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
+        OpenDatePicker();
+    }
+
+    private void OpenDatePicker() {
         c = Calendar.getInstance();
         int year = c.get(c.YEAR);
         int month = c.get(c.MONTH);
         int dayOfMonth = c.get(c.DAY_OF_MONTH);
 
-        tvw = (TextView) findViewById(R.id.textView1);
-        picker = (DatePicker) findViewById(R.id.datePicker);
+        tvw = (TextView) findViewById(R.id.open_textView);
+        picker = (DatePicker) findViewById(R.id.open_datePicker);
 
-        btnGet=(Button)findViewById(R.id.button);
+        btnGet=(Button)findViewById(R.id.open_button);
         btnGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
