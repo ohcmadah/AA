@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -55,3 +56,16 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 }
+=======
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AddActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+}
+>>>>>>> 1e6678e938c4272ae3a6998816228c83e7aaf6b8
