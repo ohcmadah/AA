@@ -52,6 +52,8 @@ public class SearchActivity extends AppCompatActivity {
            public void onClick(View v) {
                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                startActivity(intent);
+               overridePendingTransition(R.anim.anim_slide_out_left, R.anim.anim_slide_in_right);
+               SearchActivity.this.finish();
            }
         });
     }
