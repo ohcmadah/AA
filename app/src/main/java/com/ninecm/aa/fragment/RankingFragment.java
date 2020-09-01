@@ -92,10 +92,6 @@ public class RankingFragment extends Fragment {
     View.OnTouchListener setThreeStarPressed = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) return false;
-
-            if (event.getAction() != MotionEvent.ACTION_UP) return true;
-
             btnThreeStar.setPressed(false);
             return false;
         }
