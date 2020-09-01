@@ -30,7 +30,7 @@ public class MainAdapterPager extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // TIME 선택 시
-                TimeFragment timeFragment = new TimeFragment();
+                TimeFragment timeFragment = new TimeFragment(mainActivity);
                 return timeFragment;
             case 1: // RANKING 선택 시
                 RankingFragment rankingFragment = new RankingFragment(mainActivity);

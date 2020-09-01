@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity {
         cosmetics.add(cosmetic);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
-        searchItemAdapter = new SearchItemAdapter(cosmetics);
+        searchItemAdapter = new SearchItemAdapter(cosmetics, this);
         // RecyclerView Manager를 LinearLayout으로 설정
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // RecyclerView Adapter 설정

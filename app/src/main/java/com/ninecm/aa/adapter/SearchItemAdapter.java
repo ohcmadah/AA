@@ -1,5 +1,6 @@
 package com.ninecm.aa.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,30 +11,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninecm.aa.Cosmetic;
+import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
 import java.util.ArrayList;
 
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> {
     private ArrayList<Cosmetic> cosmetics;
+    private Activity searchActivity;
 
     public static class SearchItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout searchItemContainer;
-        View searchDivider;
         TextView searchTitle;
 
         // Constructor
         public SearchItemViewHolder(View v) {
             super(v);
-            searchItemContainer = (LinearLayout) v.findViewById(R.id.ranking_item_container);
-            searchDivider = (View) v.findViewById(R.id.ranking_divider);
-            searchTitle = (TextView) v.findViewById(R.id.ranking_title);
+            searchItemContainer = (LinearLayout) v.findViewById(R.id.search_item_container);
+            searchTitle = (TextView) v.findViewById(R.id.search_title);
         }
     }
 
     // Constructor
-    public SearchItemAdapter(ArrayList<Cosmetic> cosmetics) {
+    public SearchItemAdapter(ArrayList<Cosmetic> cosmetics, Activity searchActivity) {
         this.cosmetics = cosmetics;
+        this.searchActivity = searchActivity;
     }
 
     @NonNull
@@ -44,8 +46,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {// onClick event
+        holder.searchItemContainer.setOnClickListener(new ItemClickListener(searchActivity, 1));
     }
 
     @Override

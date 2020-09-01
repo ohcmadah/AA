@@ -1,6 +1,7 @@
 package com.ninecm.aa;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -101,10 +102,13 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener goAddPage = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this, AddActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-            MainActivity.this.finish();
+//            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+//            MainActivity.this.finish();
+
+            DialogFragment dialog = AddDialog.newInstance();
+            dialog.show(getSupportFragmentManager(), "add");
         }
     };
 }
