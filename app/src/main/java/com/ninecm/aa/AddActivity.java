@@ -35,10 +35,10 @@ public class AddActivity extends AppCompatActivity {
         int month = c.get(c.MONTH);
         int dayOfMonth = c.get(c.DAY_OF_MONTH);
 
-        tvw = (TextView) findViewById(R.id.open_textView);
-        picker = (DatePicker) findViewById(R.id.open_datePicker);
+        tvw = (TextView) findViewById(R.id.end_textView);
+        picker = (DatePicker) findViewById(R.id.end_datePicker);
 
-        btnGet=(Button)findViewById(R.id.open_button);
+        btnGet=(Button)findViewById(R.id.end_button);
         btnGet.setOnClickListener(setTextEndDay);
     }
 
