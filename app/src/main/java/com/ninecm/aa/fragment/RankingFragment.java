@@ -2,6 +2,7 @@ package com.ninecm.aa.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,9 @@ public class RankingFragment extends Fragment {
     private ImageButton btnTwoStar;
     private ImageButton btnOneStar;
 
+    private boolean isThreePressed;
+    private boolean isTwoPressed;
+    private boolean isOnePressed;
     private ArrayList<Cosmetic> cosmetics;
 
     public RankingFragment(Activity mainActivity) {
@@ -57,17 +62,15 @@ public class RankingFragment extends Fragment {
     }
 
     private void setUp() {
-        // 기본 메뉴로 설정(눌려짐)
-        btnThreeStar.setPressed(true);
+        // ImageButton 배경, flag 설정
+        setButtonStyle(3, true);
+        setButtonStyle(2, false);
+        setButtonStyle(1, false);
 
         // 버튼 액션 리스너 추가
-        btnThreeStar.setOnClickListener(goThreeStarMenu);
-        btnTwoStar.setOnClickListener(goTwoStarMenu);
-        btnOneStar.setOnClickListener(goOneStarMenu);
-
-        // 별 2, 3개 메뉴 누를 때 1개 메뉴 pressed 해제
-        btnTwoStar.setOnTouchListener(setThreeStarPressed);
-        btnOneStar.setOnTouchListener(setThreeStarPressed);
+        btnThreeStar.setOnTouchListener(goThreeStarMenu);
+        btnTwoStar.setOnTouchListener(goTwoStarMenu);
+        btnOneStar.setOnTouchListener(goOneStarMenu);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
@@ -89,32 +92,64 @@ public class RankingFragment extends Fragment {
         rankingRecyclerView.setAdapter(rankingItemAdapter);
     }
 
-    View.OnTouchListener setThreeStarPressed = new View.OnTouchListener() {
+    private void setButtonStyle(int btnStr, boolean flag) {
+        if (btnStr == 3) {
+            isThreePressed = flag;
+            if (isThreePressed) {
+                btnThreeStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_three_star));
+            } else {
+                btnThreeStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_three_star));
+            }
+        } else if (btnStr == 2) {
+            isTwoPressed = flag;
+            if (isTwoPressed) {
+                btnTwoStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_two_star));
+            } else {
+                btnTwoStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_two_star));
+            }
+        } else {
+            isOnePressed = flag;
+            if (isOnePressed) {
+                btnOneStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_one_star));
+            } else {
+                btnOneStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_one_star));
+            }
+        }
+    }
+
+    View.OnTouchListener goThreeStarMenu = new View.OnTouchListener() {
         @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            btnThreeStar.setPressed(false);
-            return false;
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (!isThreePressed) setButtonStyle(3, !isThreePressed);
+                if (isTwoPressed) setButtonStyle(2, !isTwoPressed);
+                if (isOnePressed) setButtonStyle(1, !isOnePressed);
+            }
+            return true;
         }
     };
 
-    View.OnClickListener goThreeStarMenu = new View.OnClickListener() {
+    View.OnTouchListener goTwoStarMenu = new View.OnTouchListener() {
         @Override
-        public void onClick(View view) {
-
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (!isTwoPressed) setButtonStyle(2, !isTwoPressed);
+                if (isThreePressed) setButtonStyle(3, !isThreePressed);
+                if (isOnePressed) setButtonStyle(1, !isOnePressed);
+            }
+            return true;
         }
     };
 
-    View.OnClickListener goTwoStarMenu = new View.OnClickListener() {
+    View.OnTouchListener goOneStarMenu = new View.OnTouchListener() {
         @Override
-        public void onClick(View view) {
-
-        }
-    };
-
-    View.OnClickListener goOneStarMenu = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (!isOnePressed) setButtonStyle(1, !isOnePressed);
+                if (isThreePressed) setButtonStyle(3, !isThreePressed);
+                if (isTwoPressed) setButtonStyle(2, !isTwoPressed);
+            }
+            return true;
         }
     };
 }
