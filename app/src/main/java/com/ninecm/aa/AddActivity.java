@@ -76,6 +76,8 @@ public class AddActivity extends AppCompatActivity {
     View.OnClickListener closePage = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            // 경고 다이얼로그 띄우기
+
             AddActivity.this.finish();
             overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
         }
@@ -95,7 +97,9 @@ public class AddActivity extends AppCompatActivity {
                 Log.d("Data", endDay);
                 Log.d("Data", String.valueOf(starNum));
                 Log.d("Data", memo);
-                closePage.onClick(view);
+
+                AddActivity.this.finish();
+                overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
             }
         }
     };
