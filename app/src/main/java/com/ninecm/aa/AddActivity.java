@@ -29,24 +29,21 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
-        btnCancel = (ImageButton) findViewById(R.id.btn_cancel);
-        btnAdd = (Button) findViewById(R.id.btn_add);
+        init();
 
-        btnCancel.setOnClickListener(closePage);
-
-        OpenDatePicker();
+        setUp();
     }
 
-    private void OpenDatePicker() {
-        c = Calendar.getInstance();
-        int year = c.get(c.YEAR);
-        int month = c.get(c.MONTH);
-        int dayOfMonth = c.get(c.DAY_OF_MONTH);
-
+    private void init() {
         tvw = (TextView) findViewById(R.id.open_textView);
         picker = (DatePicker) findViewById(R.id.open_datePicker);
-
         btnGet=(Button)findViewById(R.id.open_button);
+        btnCancel = (ImageButton) findViewById(R.id.btn_cancel);
+        btnAdd = (Button) findViewById(R.id.btn_add);
+    }
+
+    private void setUp() {
+        btnCancel.setOnClickListener(closePage);
         btnGet.setOnClickListener(setTextEndDay);
     }
 
