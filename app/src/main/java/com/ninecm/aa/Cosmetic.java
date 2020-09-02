@@ -2,17 +2,17 @@ package com.ninecm.aa;
 
 /* 관리할 품목 클래스 */
 public class Cosmetic {
+    private int id;
     private String title;
     private String endDay;
-    private String openDay;
     private String memo;
     private int star;
 
     // Constructor
-    public Cosmetic(String title, String endDay, String openDay, String memo, int star) {
+    public Cosmetic(int id, String title, String endDay,  String memo, int star) {
+        this.id = id;
         this.title = title;
         this.endDay = endDay;
-        this.openDay = openDay;
         this.memo = memo;
         this.star = star;
     }
@@ -32,14 +32,6 @@ public class Cosmetic {
 
     public void setEndDay(String endDay) {
         this.endDay = endDay;
-    }
-
-    public String getOpenDay() {
-        return openDay;
-    }
-
-    public void setOpenDay(String openDay) {
-        this.openDay = openDay;
     }
 
     public String getMemo() {

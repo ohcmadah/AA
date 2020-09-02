@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -38,13 +37,11 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setUp() {
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
-        Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
+        Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
+        Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200823", "없음", 3);
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
+        cosmetics.add(cosmetic2);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         searchItemAdapter = new SearchItemAdapter(cosmetics, this);
