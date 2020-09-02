@@ -11,15 +11,12 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 
 public class AddActivity extends AppCompatActivity {
 
     private DatePicker picker;
     private Button btnGet;
     private TextView tvw;
-    private Calendar c;
     private ImageButton btnCancel;
     private Button btnAdd;
 
@@ -45,6 +42,7 @@ public class AddActivity extends AppCompatActivity {
     private void setUp() {
         btnCancel.setOnClickListener(closePage);
         btnGet.setOnClickListener(setTextEndDay);
+        btnAdd.setOnClickListener(saveItem);
     }
 
     View.OnClickListener setTextEndDay = new View.OnClickListener() {
@@ -60,6 +58,15 @@ public class AddActivity extends AppCompatActivity {
         public void onClick(View view) {
             AddActivity.this.finish();
             overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+        }
+    };
+
+    View.OnClickListener saveItem = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+
+            closePage.onClick(view);
         }
     };
 }
