@@ -98,13 +98,12 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // backdrop 안돼서 일단 클릭하면 옆으로 넘어가는걸로 대채함..
     View.OnClickListener goAddPage = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
             startActivity(intent);
-            overridePendingTransition(0,0);
+            overridePendingTransition(R.anim.anim_slide_up, R.anim.anim_stay);
         }
     };
 }

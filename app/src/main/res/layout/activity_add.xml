@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/add"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddActivity"
-    android:orientation="vertical"
-    android:layout_marginTop="78dp"
-    android:background="@drawable/add_rect">
-
-
-
+    android:orientation="vertical">
 
     <RelativeLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:background="@drawable/add_rect_top">
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/main">
+
+        <ImageButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@drawable/cancel_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"/>
 
         <TextView
-            android:id="@+id/add_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_marginStart="72dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="23dp"
-            android:text="취소"
-            android:clickable="true"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:text="제품 추가"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
 
-        <TextView
-            android:id="@+id/add_add"
+        <Button
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="23dp"
+            android:padding="0dp"
+            android:layout_marginEnd="16dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:background="@color/transparent"
             android:text="확인"
-            android:clickable="true"
             android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
-
-<!--    <com.roacult.backdrop.BackdropLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,12 +57,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -233,8 +235,5 @@
         </ScrollView>
 
     </LinearLayout>
-
-
-<!--    </com.roacult.backdrop.BackdropLayout>-->
 
 </LinearLayout>
