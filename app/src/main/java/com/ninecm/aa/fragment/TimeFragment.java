@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
@@ -56,7 +55,6 @@ public class TimeFragment extends Fragment {
         cosmetics.add(cosmetic);
 
         // emergency 계산
-
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
