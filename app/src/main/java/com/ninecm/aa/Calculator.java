@@ -13,6 +13,7 @@ public class Calculator {
         endCalendar.set(EndYear, EndMonth - 1, EndDay);
     }
 
+
     // 문자열 yyyymmdd로부터 연도를 가져옴
     public static int getYear(String date) {
         int year;
