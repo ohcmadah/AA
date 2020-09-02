@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
     View.OnClickListener goBackPage = new View.OnClickListener() {
         public void onClick(View v) {
             SearchActivity.this.finish();
+            overridePendingTransition(R.anim.anim_slide_out_left, R.anim.anim_slide_in_right);
         }
     };
 
