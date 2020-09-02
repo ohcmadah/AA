@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class AddActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class AddActivity extends AppCompatActivity {
     private ImageButton btnAddStar2;
     private ImageButton btnAddStar3;
     private int starNum;
+    private String endDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class AddActivity extends AppCompatActivity {
         public void onClick(View v) {
             Log.d("MyTag", "Click");
             tvw.setText(picker.getYear() + "년 " + (picker.getMonth()+1) + "월 " + picker.getDayOfMonth() + "일");
+            endDay = String.valueOf(picker.getYear())+Calculator.oneToTwo(picker.getMonth())+Calculator.oneToTwo(picker.getDayOfMonth());
         }
     };
 
@@ -83,10 +86,14 @@ public class AddActivity extends AppCompatActivity {
             String title = inputTitle.getText().toString();
             String memo = inputMemo.getText().toString();
 
-            if (title.length() == 0) {
-
+            if (title.length() == 0 || starNum == 0 || endDay.length() == 0) {
+                Toast toast = Toast.makeText(getApplicationContext(), "제품명, 유통기한, 별점은 필수 항목입니다.", Toast.LENGTH_SHORT);
+                toast.show();
             } else {
-
+                Log.d("Data", title);
+                Log.d("Data", endDay);
+                Log.d("Data", String.valueOf(starNum));
+                Log.d("Data", memo);
                 closePage.onClick(view);
             }
         }
