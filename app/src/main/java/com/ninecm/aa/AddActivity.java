@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class AddActivity extends AppCompatActivity {
     private TextView tvw;
     private ImageButton btnCancel;
     private Button btnAdd;
+    private EditText inputTitle;
+    private EditText inputMemo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class AddActivity extends AppCompatActivity {
         btnGet=(Button)findViewById(R.id.open_button);
         btnCancel = (ImageButton) findViewById(R.id.btn_cancel);
         btnAdd = (Button) findViewById(R.id.btn_add);
+        inputTitle = (EditText) findViewById(R.id.input_title);
+        inputMemo = (EditText) findViewById(R.id.input_memo);
     }
 
     private void setUp() {
@@ -64,9 +69,15 @@ public class AddActivity extends AppCompatActivity {
     View.OnClickListener saveItem = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            String title = inputTitle.getText().toString();
+            String memo = inputMemo.getText().toString();
 
+            if (title.length() == 0) {
 
-            closePage.onClick(view);
+            } else {
+
+                closePage.onClick(view);
+            }
         }
     };
 }
