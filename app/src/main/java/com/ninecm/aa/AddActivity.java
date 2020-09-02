@@ -40,10 +40,11 @@ public class AddActivity extends AppCompatActivity {
         setUp();
     }
 
+
     private void init() {
-        tvw = (TextView) findViewById(R.id.open_textView);
-        picker = (DatePicker) findViewById(R.id.open_datePicker);
-        btnGet=(Button)findViewById(R.id.open_button);
+        tvw = (TextView) findViewById(R.id.end_textView);
+        picker = (DatePicker) findViewById(R.id.end_datePicker);
+        btnGet=(Button)findViewById(R.id.end_button);
         btnCancel = (ImageButton) findViewById(R.id.btn_cancel);
         btnAdd = (Button) findViewById(R.id.btn_add);
         inputTitle = (EditText) findViewById(R.id.input_title);
