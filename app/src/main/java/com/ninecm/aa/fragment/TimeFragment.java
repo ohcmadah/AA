@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
@@ -47,12 +48,24 @@ public class TimeFragment extends Fragment {
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
-        Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200823", "없음", 3);
+        Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200824", "없음", 3);
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic2);
 
-        // emergency 계산
+        /* emergency 계산 */
+        int emergIndex = Calculator.getEmergIndex(cosmetics);
+        String title = cosmetics.get(emergIndex).getTitle();
+        // Calculator의 Calendar 생성
+        Calculator calculator = Calculator.setCalculator(cosmetics, emergIndex);
+        // D-Day 계산
+        int dCount = calculator.calDday();
+        String dDay = calculator.stringDday(dCount);
+        // emergency setting
+        emergTitle.setText(title);
+        emergDday.setText(dDay);
+        // emergency 삭제
+        cosmetics.remove(emergIndex);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);

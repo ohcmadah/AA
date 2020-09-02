@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /* 필요한 변환 혹은 계산을 담은 클래스 */
@@ -60,13 +61,50 @@ public class Calculator {
         return (int) count;
     }
 
+    // Emergency 계산
+    public static int getEmergIndex(ArrayList<Cosmetic> cosmetics) {
+        int[] dCountList = new int[cosmetics.size()];
+        int emergIndex = 0;
+
+        for (int i = 0; i < cosmetics.size(); i++) {
+            Calculator calculator = Calculator.setCalculator(cosmetics, i);
+
+            // D-Day 계산
+            dCountList[i] = calculator.calDday();
+        }
+
+        int min = dCountList[0];
+        for (int j = 0; j < dCountList.length; j++) {
+            if (min > dCountList[j]) {
+                min = dCountList[j];
+            }
+        }
+
+        for (int k = 0; k < dCountList.length; k++) {
+            if (min == dCountList[k]) {
+                emergIndex = k;
+            }
+        }
+
+        return emergIndex;
+    }
+
+    public static Calculator setCalculator(ArrayList<Cosmetic> cosmetics, int index) {
+        int year = Calculator.getYear(cosmetics.get(index).getEndDay());
+        int month = Calculator.getMonth(cosmetics.get(index).getEndDay());
+        int day = Calculator.getDay(cosmetics.get(index).getEndDay());
+        Calculator calculator = new Calculator(year, month, day);
+
+        return calculator;
+    }
+
     // D-Day 계산 결과에 따른 문자열 반환
     public String stringDday(int dDay) {
         String result;
         if (dDay == 0) {
             result = "유통기한이 오늘까지입니다.";
         } else if (dDay > 0) {
-            result = String.valueOf(dDay);
+            result = "D - "+String.valueOf(dDay);
         } else {
             result = "유통기한이 "+Math.abs(dDay)+"일 지났습니다.";
         }
