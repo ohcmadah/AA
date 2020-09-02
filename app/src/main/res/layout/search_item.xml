@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="17dp"
     android:orientation="vertical"
-    android:background="@drawable/search_item_rect">
+    android:background="@drawable/black_solid_round_rect">
 
     <LinearLayout
         android:layout_width="match_parent"

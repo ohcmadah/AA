@@ -53,25 +53,29 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
     @Override
     public void onBindViewHolder(@NonNull TimeItemViewHolder holder, int position) {
-        // 첫 번째 목록일 때
-        if (position == 0) {
-            // 위쪽 모서리 둥근 사각형으로 배경 설정
-            holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_top);
-        }
-
-        // 마지막 목록일 때
-        if (position == cosmetics.size() - 1) {
-            // 아래쪽 모서리 둥근 사각형으로 배경 설정
-            holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_bottom);
+        if (cosmetics.size() == 1) {
+            // 둥근 사각형으로 배경 설정
+            holder.timeItemContainer.setBackgroundResource(R.drawable.black_solid_round_rect);
             // divider 안 보이도록 설정
             holder.divider.setVisibility(View.GONE);
+        } else {
+            // 첫 번째 목록일 때
+            if (position == 0) {
+                // 윗쪽 모서리 둥근 사각형으로 배경 설정
+                holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_top);
+            }
+
+            // 마지막 목록일 때
+            if (position == cosmetics.size() - 1) {
+                // 아래쪽 모서리 둥근 사각형으로 배경 설정
+                holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_bottom);
+                // divider 안 보이도록 설정
+                holder.divider.setVisibility(View.GONE);
+            }
         }
 
-        // 유통기한 가져와서 Calculator의 Calendar 생성
-        int year = Calculator.getYear(cosmetics.get(position).getEndDay());
-        int month = Calculator.getMonth(cosmetics.get(position).getEndDay());
-        int day = Calculator.getDay(cosmetics.get(position).getEndDay());
-        Calculator calculator = new Calculator(year, month, day);
+        // Calculator의 Calendar 생성
+        Calculator calculator = Calculator.setCalculator(cosmetics, position);
 
         // D-Day 계산
         int dCount = calculator.calDday();

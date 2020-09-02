@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.ninecm.aa.adapter.MainAdapterPager;
-import com.roacult.backdrop.BackdropLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private FloatingActionButton fab;
     private ImageButton btnSearch;
-    private BackdropLayout backdropLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

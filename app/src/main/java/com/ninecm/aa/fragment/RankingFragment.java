@@ -73,16 +73,11 @@ public class RankingFragment extends Fragment {
         btnOneStar.setOnTouchListener(goOneStarMenu);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
-        Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200826", "20200823", "없음", 2);
-        Cosmetic cosmetic2 = new Cosmetic("아큐브 투명 렌즈", "20200926", "20200823", "없음", 3);
+        Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
+        Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200823", "없음", 3);
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic);
         cosmetics.add(cosmetic2);
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic2);
-        cosmetics.add(cosmetic);
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         rankingItemAdapter = new RankingItemAdapter(cosmetics, mainActivity);
