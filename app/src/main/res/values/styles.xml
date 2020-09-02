@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/main</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme.StatusBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!--Status Bar 배경색-->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">#405FF2</item>
+        <!--Status bar 글자 색-->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 
     <!-- TabLayout Custom Text -->
