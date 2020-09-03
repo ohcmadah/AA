@@ -69,7 +69,6 @@ public class AddActivity extends AppCompatActivity {
     View.OnClickListener setTextEndDay = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d("MyTag", "Click");
             tvw.setText(picker.getYear() + "년 " + (picker.getMonth()+1) + "월 " + picker.getDayOfMonth() + "일");
             endDay = String.valueOf(picker.getYear())+Calculator.oneToTwo(picker.getMonth())+Calculator.oneToTwo(picker.getDayOfMonth());
         }
@@ -81,7 +80,7 @@ public class AddActivity extends AppCompatActivity {
             // 경고 다이얼로그 띄우기
 
             new AlertDialog.Builder(AddActivity.this)
-                    .setMessage("제품등록을 취소하시겠습니까?")
+                    .setMessage("제품 등록을 취소하시겠습니까?")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -92,7 +91,7 @@ public class AddActivity extends AppCompatActivity {
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext(), "취소 누름", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "취소를 누르셨습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }).show();
 
