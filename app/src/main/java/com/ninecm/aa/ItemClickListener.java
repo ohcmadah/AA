@@ -1,7 +1,6 @@
 package com.ninecm.aa;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 

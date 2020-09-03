@@ -26,16 +26,6 @@ public class SearchActivity extends AppCompatActivity {
 
         init();
 
-        setUp();
-    }
-
-    private void init() {
-        // RecyclerView를 가져옴
-        searchRecyclerView = (RecyclerView) findViewById(R.id.search_recyclerview);
-        searchCancel = (TextView) findViewById(R.id.search_cancel);
-    }
-
-    private void setUp() {
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
         Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200823", "없음", 3);
@@ -52,6 +42,11 @@ public class SearchActivity extends AppCompatActivity {
 
         // 검색 취소 액션 리스너 등록
         searchCancel.setOnClickListener(goBackPage);
+    }
+
+    private void init() {
+        searchRecyclerView = (RecyclerView) findViewById(R.id.search_recyclerview);
+        searchCancel = (TextView) findViewById(R.id.search_cancel);
     }
 
     View.OnClickListener goBackPage = new View.OnClickListener() {
