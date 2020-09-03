@@ -1,7 +1,9 @@
 package com.ninecm.aa;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,8 +80,22 @@ public class AddActivity extends AppCompatActivity {
         public void onClick(View view) {
             // 경고 다이얼로그 띄우기
 
-            AddActivity.this.finish();
-            overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+            new AlertDialog.Builder(AddActivity.this)
+                    .setMessage("제품등록을 취소하시겠습니까?")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            AddActivity.this.finish();
+                            overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(), "취소 누름", Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+
         }
     };
 
