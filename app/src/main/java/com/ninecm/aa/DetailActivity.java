@@ -2,8 +2,6 @@ package com.ninecm.aa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import static com.ninecm.aa.R.*;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageButton btnBack;
-    private int star_number;
+    private int starNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
