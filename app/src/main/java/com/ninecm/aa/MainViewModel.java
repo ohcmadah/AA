@@ -10,37 +10,35 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
-    private AppDatabase db;
+    private CosmeticRepository repository;
+    private LiveData<List<Cosmetic>> allCosmetics;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-
-        db = AppDatabase.getInstance(application);
+        repository = new CosmeticRepository(application);
+        allCosmetics = repository.getAll();
     }
 
     public LiveData<List<Cosmetic>> getAll() {
-        return db.cosmeticDao().getAll();
+        return allCosmetics;
     }
 
+    /*
     public LiveData<Integer> getDataCount() {
         return db.cosmeticDao().getDataCount();
     }
 
+     */
+
     public void insert(Cosmetic cosmetic) {
-        new InsertAsyncTask(db.cosmeticDao()).execute(cosmetic);
+        repository.insert(cosmetic);
     }
 
-    private static class InsertAsyncTask extends AsyncTask<Cosmetic, Void, Void> {
-        private CosmeticDao mCosmeticDao;
+    public void update(Cosmetic cosmetic) {
+        repository.update(cosmetic);
+    }
 
-        public InsertAsyncTask(CosmeticDao cosmeticDao) {
-            this.mCosmeticDao = cosmeticDao;
-        }
-
-        @Override
-        protected Void doInBackground(Cosmetic... cosmetics) {
-            mCosmeticDao.insert(cosmetics[0]);
-            return null;
-        }
+    public void delete(Cosmetic cosmetic) {
+        repository.delete(cosmetic);
     }
 }

@@ -63,11 +63,11 @@ public class Calculator {
     }
 
     // Emergency 계산
-    public static int getEmergIndex(List<Cosmetic> cosmetics, int size) {
-        int[] dCountList = new int[size];
+    public static int getEmergIndex(List<Cosmetic> cosmetics) {
+        int[] dCountList = new int[cosmetics.size()];
         int emergIndex = 0;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < cosmetics.size(); i++) {
             Calculator calculator = Calculator.setCalculator(cosmetics, i);
 
             // D-Day 계산

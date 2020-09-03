@@ -15,11 +15,12 @@ import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeItemViewHolder> {
 
-    private List<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics = new ArrayList<>();
     private Activity mainActivity;
 
     public static class TimeItemViewHolder extends RecyclerView.ViewHolder {
@@ -39,8 +40,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
     }
 
     // Constructor
-    public TimeItemAdapter(List<Cosmetic> cosmetics, Activity mainActivity) {
-        this.cosmetics = cosmetics;
+    public TimeItemAdapter(Activity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
@@ -89,6 +89,11 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
         // onClick event
         holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+    }
+
+    public void setCosmetics(List<Cosmetic> cosmetics) {
+        this.cosmetics = cosmetics;
+        notifyDataSetChanged();
     }
 
     // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환

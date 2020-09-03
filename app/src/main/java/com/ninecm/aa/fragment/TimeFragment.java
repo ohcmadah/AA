@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -26,6 +25,7 @@ import com.ninecm.aa.MainViewModel;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.TimeItemAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimeFragment extends Fragment implements ViewModelStoreOwner {
@@ -34,14 +34,13 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
     private LinearLayout emergContainer;
     private TextView emergTitle;
     private TextView emergDday;
-
-    private List<Cosmetic> cosmetics;
     private Activity mainActivity;
 
     private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
     private ViewModelStore viewModelStore = new ViewModelStore();
     private MainViewModel viewModel;
-    private int size;
+
+    private List<Cosmetic> cosmeticList = new ArrayList<>();
 
     public TimeFragment(Activity mainActivity) {
         this.mainActivity = mainActivity;
@@ -56,25 +55,17 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
 
         init(view);
 
-        viewModel.insert(new Cosmetic("제발 좀 돼라", "20200823", 3, "없음"));
-        viewModel.insert(new Cosmetic("제발", "20200921", 3, "없음"));
-
-        viewModel.getAll().observe(this, dbCosmetics -> {
-            String title = dbCosmetics.toString();
-            Log.d("MyTag", title);
-        });
-
-
-        viewModel.getDataCount().observe(this, integer -> size = integer);
-
-        //calEmergency();
-
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
-        timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
+        timeItemAdapter = new TimeItemAdapter(mainActivity);
         // RecyclerView Manager를 LinearLayout으로 설정
         timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // RecyclerView Adapter 설정
         timeRecyclerView.setAdapter(timeItemAdapter);
+
+        viewModel.getAll().observe(this, dbCosmetics -> {
+            calEmergency(dbCosmetics);
+            timeItemAdapter.setCosmetics(cosmeticList);
+        });
 
         emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
 
@@ -95,12 +86,13 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         emergDday = (TextView) view.findViewById(R.id.emerg_dday);
     }
 
-    public void calEmergency() {
+    public void calEmergency(List<Cosmetic> cosmetics) {
+        cosmeticList = cosmetics;
         /* emergency 계산 */
-        int emergIndex = Calculator.getEmergIndex(cosmetics, size);
-        String title = cosmetics.get(emergIndex).getTitle();
+        int emergIndex = Calculator.getEmergIndex(cosmeticList);
+        String title = cosmeticList.get(emergIndex).getTitle();
         // Calculator의 Calendar 생성
-        Calculator calculator = Calculator.setCalculator(cosmetics, emergIndex);
+        Calculator calculator = Calculator.setCalculator(cosmeticList, emergIndex);
         // D-Day 계산
         int dCount = calculator.calDday();
         String dDay = calculator.stringDday(dCount);
@@ -108,7 +100,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         emergTitle.setText(title);
         emergDday.setText(dDay);
         // emergency 삭제
-        cosmetics.remove(emergIndex);
+        cosmeticList.remove(emergIndex);
     }
 
     @Override
