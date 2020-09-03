@@ -11,7 +11,7 @@ import java.util.List;
 
 @Dao
 public interface CosmeticDao {
-    @Query("SELECT * FROM Cosmetic")
+    @Query("SELECT * FROM cosmetic_table")
     LiveData<List<Cosmetic>> getAll();
 
     @Insert
@@ -23,6 +23,6 @@ public interface CosmeticDao {
     @Delete
     void delete(Cosmetic cosmetic);
 
-    @Query("SELECT COUNT(1) FROM Cosmetic")
+    @Query("SELECT COUNT(1) FROM cosmetic_table")
     LiveData<Integer> getDataCount();
 }

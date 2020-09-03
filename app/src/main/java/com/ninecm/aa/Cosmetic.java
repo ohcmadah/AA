@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /* 관리할 품목 클래스 */
-@Entity
+@Entity(tableName = "cosmetic_table")
 public class Cosmetic {
     @PrimaryKey(autoGenerate = true)
     private int id;

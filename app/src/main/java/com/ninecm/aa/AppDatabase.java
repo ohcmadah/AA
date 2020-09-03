@@ -11,14 +11,10 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CosmeticDao cosmeticDao();
     private static volatile AppDatabase INSTANCE;
 
-    public static AppDatabase getInstance(Context context) {
+    public static synchronized AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (AppDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "cosmetic-db")
-                            .build();
-                }
-            }
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "cosmetic-db")
+                    .build();
         }
         return INSTANCE;
     }
