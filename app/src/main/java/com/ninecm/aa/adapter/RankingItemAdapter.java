@@ -14,11 +14,11 @@ import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.RankingItemViewHolder> {
 
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
     private Activity mainActivity;
 
     public static class RankingItemViewHolder extends RecyclerView.ViewHolder {
@@ -36,7 +36,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     }
 
     // Constructor
-    public RankingItemAdapter(ArrayList<Cosmetic> cosmetics, Activity mainActivity) {
+    public RankingItemAdapter(List<Cosmetic> cosmetics, Activity mainActivity) {
         this.cosmetics = cosmetics;
         this.mainActivity = mainActivity;
     }

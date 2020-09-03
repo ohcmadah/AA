@@ -14,10 +14,10 @@ import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> {
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
     private Activity searchActivity;
 
     public static class SearchItemViewHolder extends RecyclerView.ViewHolder {
@@ -33,7 +33,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     }
 
     // Constructor
-    public SearchItemAdapter(ArrayList<Cosmetic> cosmetics, Activity searchActivity) {
+    public SearchItemAdapter(List<Cosmetic> cosmetics, Activity searchActivity) {
         this.cosmetics = cosmetics;
         this.searchActivity = searchActivity;
     }

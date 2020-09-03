@@ -15,11 +15,11 @@ import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeItemViewHolder> {
 
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
     private Activity mainActivity;
 
     public static class TimeItemViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +39,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
     }
 
     // Constructor
-    public TimeItemAdapter(ArrayList<Cosmetic> cosmetics, Activity mainActivity) {
+    public TimeItemAdapter(List<Cosmetic> cosmetics, Activity mainActivity) {
         this.cosmetics = cosmetics;
         this.mainActivity = mainActivity;
     }

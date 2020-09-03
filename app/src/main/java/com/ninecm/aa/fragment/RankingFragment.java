@@ -19,6 +19,7 @@ import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.RankingItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RankingFragment extends Fragment {
 
@@ -29,7 +30,7 @@ public class RankingFragment extends Fragment {
     private ImageButton btnTwoStar;
     private ImageButton btnOneStar;
 
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
 
     public RankingFragment(Activity mainActivity) {
         this.mainActivity = mainActivity;

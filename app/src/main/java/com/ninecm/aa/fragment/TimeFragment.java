@@ -1,8 +1,8 @@
 package com.ninecm.aa.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +12,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.ninecm.aa.AppDatabase;
 import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
+import com.ninecm.aa.MainViewModel;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.TimeItemAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class TimeFragment extends Fragment {
+public class TimeFragment extends Fragment implements ViewModelStoreOwner {
     private RecyclerView timeRecyclerView;
     private TimeItemAdapter timeItemAdapter;
     private LinearLayout emergContainer;
     private TextView emergTitle;
     private TextView emergDday;
 
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
     private Activity mainActivity;
+
+    private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
+    private ViewModelStore viewModelStore = new ViewModelStore();
+    private MainViewModel viewModel;
+    private int size;
 
     public TimeFragment(Activity mainActivity) {
         this.mainActivity = mainActivity;
@@ -44,26 +52,22 @@ public class TimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
-        Context context = getContext();
-        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "cosmetic-db")
-                .allowMainThreadQueries()
-                .build();
+        db();
 
         init(view);
 
-        // db.cosmeticDao().insert(new Cosmetic("에뛰드 스킨", "20200823", 2, "없음"));
+        viewModel.insert(new Cosmetic("제발 좀 돼라", "20200823", 3, "없음"));
+        viewModel.insert(new Cosmetic("제발", "20200921", 3, "없음"));
 
-        cosmetics = new ArrayList<>();
-        for (int i = 0; i < db.cosmeticDao().getAll().size(); i++) {
-            String dbTitle = db.cosmeticDao().getAll().get(i).getTitle();
-            String dbEndDay = db.cosmeticDao().getAll().get(i).getEndDay();
-            int dbStar = db.cosmeticDao().getAll().get(i).getStar();
-            String dbMemo = db.cosmeticDao().getAll().get(i).getMemo();
-            Cosmetic cosmetic = new Cosmetic(dbTitle, dbEndDay, dbStar, dbMemo);
-            cosmetics.add(cosmetic);
-        }
+        viewModel.getAll().observe(this, dbCosmetics -> {
+            String title = dbCosmetics.toString();
+            Log.d("MyTag", title);
+        });
 
-        calEmergency();
+
+        viewModel.getDataCount().observe(this, integer -> size = integer);
+
+        //calEmergency();
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
@@ -77,6 +81,13 @@ public class TimeFragment extends Fragment {
         return view;
     }
 
+    public void db() {
+        if (viewModelFactory == null) {
+            viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication());
+        }
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
+    }
+
     public void init(View view) {
         timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
         emergContainer = (LinearLayout) view.findViewById(R.id.emerg_container);
@@ -86,7 +97,7 @@ public class TimeFragment extends Fragment {
 
     public void calEmergency() {
         /* emergency 계산 */
-        int emergIndex = Calculator.getEmergIndex(cosmetics);
+        int emergIndex = Calculator.getEmergIndex(cosmetics, size);
         String title = cosmetics.get(emergIndex).getTitle();
         // Calculator의 Calendar 생성
         Calculator calculator = Calculator.setCalculator(cosmetics, emergIndex);
@@ -98,5 +109,17 @@ public class TimeFragment extends Fragment {
         emergDday.setText(dDay);
         // emergency 삭제
         cosmetics.remove(emergIndex);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModelStore.clear();
+    }
+
+    @NonNull
+    @Override
+    public ViewModelStore getViewModelStore() {
+        return viewModelStore;
     }
 }

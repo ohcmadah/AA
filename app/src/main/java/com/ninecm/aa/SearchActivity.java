@@ -11,11 +11,12 @@ import android.widget.TextView;
 import com.ninecm.aa.adapter.SearchItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchRecyclerView;
-    private ArrayList<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics;
     private SearchItemAdapter searchItemAdapter;
     private TextView searchCancel;
 

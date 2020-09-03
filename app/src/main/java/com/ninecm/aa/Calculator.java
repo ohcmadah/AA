@@ -2,6 +2,7 @@ package com.ninecm.aa;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /* 필요한 변환 혹은 계산을 담은 클래스 */
 public class Calculator {
@@ -62,11 +63,11 @@ public class Calculator {
     }
 
     // Emergency 계산
-    public static int getEmergIndex(ArrayList<Cosmetic> cosmetics) {
-        int[] dCountList = new int[cosmetics.size()];
+    public static int getEmergIndex(List<Cosmetic> cosmetics, int size) {
+        int[] dCountList = new int[size];
         int emergIndex = 0;
 
-        for (int i = 0; i < cosmetics.size(); i++) {
+        for (int i = 0; i < size; i++) {
             Calculator calculator = Calculator.setCalculator(cosmetics, i);
 
             // D-Day 계산
@@ -89,7 +90,7 @@ public class Calculator {
         return emergIndex;
     }
 
-    public static Calculator setCalculator(ArrayList<Cosmetic> cosmetics, int index) {
+    public static Calculator setCalculator(List<Cosmetic> cosmetics, int index) {
         int year = Calculator.getYear(cosmetics.get(index).getEndDay());
         int month = Calculator.getMonth(cosmetics.get(index).getEndDay());
         int day = Calculator.getDay(cosmetics.get(index).getEndDay());
