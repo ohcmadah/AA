@@ -41,10 +41,7 @@ public class TimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
-        timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
-        emergContainer = (LinearLayout) view.findViewById(R.id.emerg_container);
-        emergTitle = (TextView) view.findViewById(R.id.emerg_title);
-        emergDday = (TextView) view.findViewById(R.id.emerg_dday);
+        init(view);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
@@ -53,6 +50,28 @@ public class TimeFragment extends Fragment {
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic2);
 
+        calEmergency();
+
+        // RecyclerView Adapter 생성 및 Cosmetic List 전달
+        timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
+        // RecyclerView Manager를 LinearLayout으로 설정
+        timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // RecyclerView Adapter 설정
+        timeRecyclerView.setAdapter(timeItemAdapter);
+
+        emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+
+        return view;
+    }
+
+    public void init(View view) {
+        timeRecyclerView = (RecyclerView) view.findViewById(R.id.time_recyclerview);
+        emergContainer = (LinearLayout) view.findViewById(R.id.emerg_container);
+        emergTitle = (TextView) view.findViewById(R.id.emerg_title);
+        emergDday = (TextView) view.findViewById(R.id.emerg_dday);
+    }
+
+    public void calEmergency() {
         /* emergency 계산 */
         int emergIndex = Calculator.getEmergIndex(cosmetics);
         String title = cosmetics.get(emergIndex).getTitle();
@@ -66,16 +85,5 @@ public class TimeFragment extends Fragment {
         emergDday.setText(dDay);
         // emergency 삭제
         cosmetics.remove(emergIndex);
-
-        // RecyclerView Adapter 생성 및 Cosmetic List 전달
-        timeItemAdapter = new TimeItemAdapter(cosmetics, mainActivity);
-        // RecyclerView Manager를 LinearLayout으로 설정
-        timeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // RecyclerView Adapter 설정
-        timeRecyclerView.setAdapter(timeItemAdapter);
-
-        emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
-
-        return view;
     }
 }
