@@ -2,7 +2,6 @@ package com.ninecm.aa.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,9 +29,6 @@ public class RankingFragment extends Fragment {
     private ImageButton btnTwoStar;
     private ImageButton btnOneStar;
 
-    private boolean isThreePressed;
-    private boolean isTwoPressed;
-    private boolean isOnePressed;
     private ArrayList<Cosmetic> cosmetics;
 
     public RankingFragment(Activity mainActivity) {
@@ -49,28 +44,12 @@ public class RankingFragment extends Fragment {
         init(view);
 
         // set up
-        setUp();
-
-        return view;
-    }
-
-    private void init(View view) {
-        rankingRecyclerView = (RecyclerView) view.findViewById(R.id.ranking_recyclerview);
-        btnThreeStar = (ImageButton) view.findViewById(R.id.btn_three_star);
-        btnTwoStar = (ImageButton) view.findViewById(R.id.btn_two_star);
-        btnOneStar = (ImageButton) view.findViewById(R.id.btn_one_star);
-    }
-
-    private void setUp() {
-        // ImageButton 배경, flag 설정
-        setButtonStyle(3, true);
-        setButtonStyle(2, false);
-        setButtonStyle(1, false);
-
+        // 기본 눌려진 버튼
+        btnThreeStar.setSelected(true);
         // 버튼 액션 리스너 추가
-        btnThreeStar.setOnTouchListener(goThreeStarMenu);
-        btnTwoStar.setOnTouchListener(goTwoStarMenu);
-        btnOneStar.setOnTouchListener(goOneStarMenu);
+        btnThreeStar.setOnTouchListener(changeStarPage);
+        btnTwoStar.setOnTouchListener(changeStarPage);
+        btnOneStar.setOnTouchListener(changeStarPage);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
         Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
@@ -85,66 +64,43 @@ public class RankingFragment extends Fragment {
         rankingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // RecyclerView Adapter 설정
         rankingRecyclerView.setAdapter(rankingItemAdapter);
+
+        return view;
     }
 
-    private void setButtonStyle(int btnStr, boolean flag) {
-        if (btnStr == 3) {
-            isThreePressed = flag;
-            if (isThreePressed) {
-                btnThreeStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_three_star));
-            } else {
-                btnThreeStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_three_star));
-            }
-        } else if (btnStr == 2) {
-            isTwoPressed = flag;
-            if (isTwoPressed) {
-                btnTwoStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_two_star));
-            } else {
-                btnTwoStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_two_star));
-            }
-        } else {
-            isOnePressed = flag;
-            if (isOnePressed) {
-                btnOneStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_one_star));
-            } else {
-                btnOneStar.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.btn_empty_one_star));
-            }
-        }
+    private void init(View view) {
+        rankingRecyclerView = (RecyclerView) view.findViewById(R.id.ranking_recyclerview);
+        btnThreeStar = (ImageButton) view.findViewById(R.id.btn_three_star);
+        btnTwoStar = (ImageButton) view.findViewById(R.id.btn_two_star);
+        btnOneStar = (ImageButton) view.findViewById(R.id.btn_one_star);
     }
 
-    View.OnTouchListener goThreeStarMenu = new View.OnTouchListener() {
+    View.OnTouchListener changeStarPage = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                if (!isThreePressed) setButtonStyle(3, !isThreePressed);
-                if (isTwoPressed) setButtonStyle(2, !isTwoPressed);
-                if (isOnePressed) setButtonStyle(1, !isOnePressed);
-            }
-            return true;
-        }
-    };
+                switch (view.getId()) {
+                    case R.id.btn_three_star:
+                        btnTwoStar.setSelected(false);
+                        btnOneStar.setSelected(false);
+                        btnThreeStar.setSelected(true);
+                        break;
 
-    View.OnTouchListener goTwoStarMenu = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                if (!isTwoPressed) setButtonStyle(2, !isTwoPressed);
-                if (isThreePressed) setButtonStyle(3, !isThreePressed);
-                if (isOnePressed) setButtonStyle(1, !isOnePressed);
-            }
-            return true;
-        }
-    };
+                    case R.id.btn_two_star:
+                        btnThreeStar.setSelected(false);
+                        btnOneStar.setSelected(false);
+                        btnTwoStar.setSelected(true);
+                        break;
 
-    View.OnTouchListener goOneStarMenu = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                if (!isOnePressed) setButtonStyle(1, !isOnePressed);
-                if (isThreePressed) setButtonStyle(3, !isThreePressed);
-                if (isTwoPressed) setButtonStyle(2, !isTwoPressed);
+                    case R.id.btn_one_star:
+                        btnThreeStar.setSelected(false);
+                        btnTwoStar.setSelected(false);
+                        btnOneStar.setSelected(true);
+                        break;
+                }
             }
-            return true;
+
+            return false;
         }
     };
 }
