@@ -44,8 +44,8 @@ public class TimeFragment extends Fragment {
         init(view);
 
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
-        Cosmetic cosmetic = new Cosmetic(1, "에뛰드 스킨", "20200823", "없음", 2);
-        Cosmetic cosmetic2 = new Cosmetic(2, "아큐브 투명 렌즈", "20200824", "없음", 3);
+        Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200823", 2, "없음");
+        Cosmetic cosmetic2 = new Cosmetic("아큐브 투명 렌즈", "20200823", 3, "없음");
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic2);
