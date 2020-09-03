@@ -1,24 +1,34 @@
 package com.ninecm.aa;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.ninecm.aa.adapter.MainAdapterPager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewModelStoreOwner {
+    public static final int ADD_COSMETIC_REQUEST = 1;
 
     private MainAdapterPager adapterPager;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
     private ImageButton btnSearch;
+
+    private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
+    private ViewModelStore viewModelStore = new ViewModelStore();
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +103,35 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, ADD_COSMETIC_REQUEST);
             overridePendingTransition(R.anim.anim_slide_up, R.anim.anim_stay);
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_COSMETIC_REQUEST && resultCode == RESULT_OK) {
+            String title = data.getStringExtra(AddActivity.EXTRA_TITLE);
+            String endDay = data.getStringExtra(AddActivity.EXTRA_END_DAY);
+            int starNum = data.getIntExtra(AddActivity.EXTRA_STAR, 1);
+            String memo = data.getStringExtra(AddActivity.EXTRA_MEMO);
+
+            Cosmetic cosmetic = new Cosmetic(title, endDay, starNum, memo);
+            setViewModel();
+            viewModel.insert(cosmetic);
+
+            Toast.makeText(this, "제품이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "제품이 등록되지 않았습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setViewModel() {
+        if (viewModelFactory == null) {
+            viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication());
+        }
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
+    }
 }

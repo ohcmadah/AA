@@ -51,7 +51,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
-        db();
+        setViewModel();
 
         init(view);
 
@@ -62,17 +62,20 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         // RecyclerView Adapter 설정
         timeRecyclerView.setAdapter(timeItemAdapter);
 
+        // 데이터베이스의 상태가 변경되면 자동으로 실행
+        // 데이터베이스에서 Cosmetic List를 받아 Emergency 계산 후 Adapter에 전달함
         viewModel.getAll().observe(this, dbCosmetics -> {
             calEmergency(dbCosmetics);
             timeItemAdapter.setCosmetics(cosmeticList);
         });
 
+        // Emergency Card 클릭 Action Event
         emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
 
         return view;
     }
 
-    public void db() {
+    public void setViewModel() {
         if (viewModelFactory == null) {
             viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication());
         }

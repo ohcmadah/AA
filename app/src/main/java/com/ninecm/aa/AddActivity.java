@@ -4,8 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,6 +17,10 @@ import android.widget.Toast;
 
 
 public class AddActivity extends AppCompatActivity {
+    public static final String EXTRA_TITLE = "com.ninecm.aa.EXTRA_TITLE";
+    public static final String EXTRA_END_DAY = "com.ninecm.aa.EXTRA_END_DAY";
+    public static final String EXTRA_STAR = "com.ninecm.aa.EXTRA_STAR";
+    public static final String EXTRA_MEMO = "com.ninecm.aa.EXTRA_MEMO";
 
     private DatePicker picker;
     private Button btnGet;
@@ -101,17 +105,20 @@ public class AddActivity extends AppCompatActivity {
     View.OnClickListener saveItem = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String title = inputTitle.getText().toString();
-            String memo = inputMemo.getText().toString();
+            String title = inputTitle.getText().toString().trim();
+            String memo = inputMemo.getText().toString().trim();
 
             if (title.length() == 0 || starNum == 0 || endDay.length() == 0) {
                 Toast toast = Toast.makeText(getApplicationContext(), "제품명, 유통기한, 별점은 필수 항목입니다.", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                Log.d("Data", title);
-                Log.d("Data", endDay);
-                Log.d("Data", String.valueOf(starNum));
-                Log.d("Data", memo);
+                Intent data = new Intent();
+                data.putExtra(EXTRA_TITLE, title);
+                data.putExtra(EXTRA_END_DAY, endDay);
+                data.putExtra(EXTRA_STAR, starNum);
+                data.putExtra(EXTRA_MEMO, memo);
+
+                setResult(RESULT_OK, data);
 
                 AddActivity.this.finish();
                 overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);

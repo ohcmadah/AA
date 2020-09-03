@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.StatusBar">
         <activity android:name=".AddActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".MainActivity">
