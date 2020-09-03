@@ -1,6 +1,7 @@
 package com.ninecm.aa.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import com.ninecm.aa.AppDatabase;
 import com.ninecm.aa.Calculator;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
@@ -41,14 +44,34 @@ public class TimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
+        Context context = getContext();
+        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "cosmetic-db")
+                .allowMainThreadQueries()
+                .build();
+
         init(view);
 
+        // db.cosmeticDao().insert(new Cosmetic("에뛰드 스킨", "20200823", 2, "없음"));
+
+        cosmetics = new ArrayList<>();
+        for (int i = 0; i < db.cosmeticDao().getAll().size(); i++) {
+            String dbTitle = db.cosmeticDao().getAll().get(i).getTitle();
+            String dbEndDay = db.cosmeticDao().getAll().get(i).getEndDay();
+            int dbStar = db.cosmeticDao().getAll().get(i).getStar();
+            String dbMemo = db.cosmeticDao().getAll().get(i).getMemo();
+            Cosmetic cosmetic = new Cosmetic(dbTitle, dbEndDay, dbStar, dbMemo);
+            cosmetics.add(cosmetic);
+        }
+
         // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
+        /*
         Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200823", 2, "없음");
         Cosmetic cosmetic2 = new Cosmetic("아큐브 투명 렌즈", "20200823", 3, "없음");
         cosmetics = new ArrayList<>();
         cosmetics.add(cosmetic);
         cosmetics.add(cosmetic2);
+
+         */
 
         calEmergency();
 
