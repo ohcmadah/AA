@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import static com.ninecm.aa.R.*;
 public class DetailActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private int starNumber;
+    private CheckBox btnExceptTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +24,26 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(layout.activity_detail);
 
         init();
+
         setUp();
 
-        ImageView iv = new ImageView(this);
-        LinearLayout layout = (LinearLayout) findViewById(id.star_container);
+        setStar();
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+    }
+
+    private void init() {
+        btnBack = (ImageButton) findViewById(R.id.btn_back);
+        btnExceptTime = (CheckBox) findViewById(R.id.btn_except_time);
+    }
+
+    private void setUp() {
+        btnBack.setOnClickListener(goBackPage);
+        btnExceptTime.setButtonDrawable(drawable.checkbox_selector);
+    }
+
+    private void setStar() {
+        ImageView iv = new ImageView(this);
+        LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
 
         iv.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -38,16 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         );
         iv.setImageResource(drawable.star_icon);
 
-        layout.addView(iv);
-
-    }
-
-    private void init() {
-        btnBack = (ImageButton) findViewById(id.btn_back);
-    }
-
-    private void setUp() {
-        btnBack.setOnClickListener(goBackPage);
+        starContainer.addView(iv);
     }
 
     View.OnClickListener goBackPage = new View.OnClickListener() {
