@@ -38,15 +38,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:text="에뛰드 로션" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/emerg_dday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/light_grey"
-                        android:text="D - 1"/>
+                        android:textColor="@color/light_grey" />
 
                 </LinearLayout>
 

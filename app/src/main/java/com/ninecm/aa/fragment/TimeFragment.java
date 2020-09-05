@@ -55,6 +55,8 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
 
         init(view);
 
+        emergTitle.setText("제품을 추가해주세요.");
+
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(mainActivity);
         // RecyclerView Manager를 LinearLayout으로 설정
@@ -68,9 +70,6 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
             calEmergency(dbCosmetics);
             timeItemAdapter.setCosmetics(cosmeticList);
         });
-
-        // Emergency Card 클릭 Action Event
-        emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
 
         return view;
     }
@@ -93,17 +92,28 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         cosmeticList = cosmetics;
         /* emergency 계산 */
         int emergIndex = Calculator.getEmergIndex(cosmeticList);
-        String title = cosmeticList.get(emergIndex).getTitle();
-        // Calculator의 Calendar 생성
-        Calculator calculator = Calculator.setCalculator(cosmeticList, emergIndex);
-        // D-Day 계산
-        int dCount = calculator.calDday();
-        String dDay = calculator.stringDday(dCount);
-        // emergency setting
-        emergTitle.setText(title);
-        emergDday.setText(dDay);
-        // emergency 삭제
-        cosmeticList.remove(emergIndex);
+
+        if (emergIndex != -1) {
+            String title = cosmeticList.get(emergIndex).getTitle();
+
+            // Calculator의 Calendar 생성
+            Calculator calculator = Calculator.setCalculator(cosmeticList, emergIndex);
+
+            // D-Day 계산
+            int dCount = calculator.calDday();
+            String dDay = calculator.stringDday(dCount);
+
+            // emergency setting
+            emergTitle.setText(title);
+            emergDday.setText(dDay);
+
+            // emergency 삭제
+            cosmeticList.remove(emergIndex);
+
+            emergContainer.setVisibility(View.VISIBLE);
+            // Emergency Card 클릭 Action Event
+            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+        }
     }
 
     @Override

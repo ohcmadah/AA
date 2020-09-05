@@ -64,26 +64,27 @@ public class Calculator {
 
     // Emergency 계산
     public static int getEmergIndex(List<Cosmetic> cosmetics) {
-        int[] dCountList = new int[cosmetics.size()];
-        int emergIndex = 0;
+        int emergIndex = -1;
+        if (cosmetics.size() != 0) {
+            int[] dCountList = new int[cosmetics.size()];
+            for (int i = 0; i < cosmetics.size(); i++) {
+                Calculator calculator = Calculator.setCalculator(cosmetics, i);
 
-        for (int i = 0; i < cosmetics.size(); i++) {
-            Calculator calculator = Calculator.setCalculator(cosmetics, i);
-
-            // D-Day 계산
-            dCountList[i] = calculator.calDday();
-        }
-
-        int min = dCountList[0];
-        for (int j = 0; j < dCountList.length; j++) {
-            if (min > dCountList[j]) {
-                min = dCountList[j];
+                // D-Day 계산
+                dCountList[i] = calculator.calDday();
             }
-        }
 
-        for (int k = 0; k < dCountList.length; k++) {
-            if (min == dCountList[k]) {
-                emergIndex = k;
+            int min = dCountList[0];
+            for (int j = 0; j < dCountList.length; j++) {
+                if (min > dCountList[j]) {
+                    min = dCountList[j];
+                }
+            }
+
+            for (int k = 0; k < dCountList.length; k++) {
+                if (min == dCountList[k]) {
+                    emergIndex = k;
+                }
             }
         }
 

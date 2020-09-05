@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -133,5 +134,17 @@ public class MainActivity extends AppCompatActivity implements ViewModelStoreOwn
             viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication());
         }
         viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModelStore.clear();
+    }
+
+    @NonNull
+    @Override
+    public ViewModelStore getViewModelStore() {
+        return viewModelStore;
     }
 }
