@@ -12,6 +12,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private CosmeticRepository repository;
     private LiveData<List<Cosmetic>> allCosmetics;
+    private Cosmetic cosmetic;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -21,6 +22,11 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<List<Cosmetic>> getAll() {
         return allCosmetics;
+    }
+
+    public Cosmetic getById(int id) {
+        cosmetic = repository.getById(id);
+        return cosmetic;
     }
 
     public void insert(Cosmetic cosmetic) {

@@ -112,7 +112,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
 
             emergContainer.setVisibility(View.VISIBLE);
             // Emergency Card 클릭 Action Event
-            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, emergIndex));
         }
     }
 

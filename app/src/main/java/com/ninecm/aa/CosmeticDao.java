@@ -14,6 +14,9 @@ public interface CosmeticDao {
     @Query("SELECT * FROM cosmetic_table")
     LiveData<List<Cosmetic>> getAll();
 
+    @Query("SELECT * FROM cosmetic_table WHERE id=:id")
+    Cosmetic getById(int id);
+
     @Insert
     void insert(Cosmetic cosmetic);
 
