@@ -17,14 +17,15 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="290dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="50dp"
             android:layout_alignParentStart="true"
             android:background="@drawable/search_search_rect">
 
             <LinearLayout
                 android:gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -36,10 +37,10 @@
                 <EditText
                     android:id="@+id/search_edittext"
                     android:layout_marginStart="7dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:textSize="15sp"
-                    android:text="미샤"
+                    android:hint="검색어를 입력하세요"
                     android:background="@null" />
 
             </LinearLayout>
@@ -56,8 +57,6 @@
             android:clickable="true"
             android:textColor="@color/main"
             android:textSize="18sp" />
-
-
 
     </RelativeLayout>
 
