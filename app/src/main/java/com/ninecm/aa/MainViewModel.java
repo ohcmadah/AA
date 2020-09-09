@@ -23,13 +23,6 @@ public class MainViewModel extends AndroidViewModel {
         return allCosmetics;
     }
 
-    /*
-    public LiveData<Integer> getDataCount() {
-        return db.cosmeticDao().getDataCount();
-    }
-
-     */
-
     public void insert(Cosmetic cosmetic) {
         repository.insert(cosmetic);
     }

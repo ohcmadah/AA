@@ -22,7 +22,4 @@ public interface CosmeticDao {
 
     @Delete
     void delete(Cosmetic cosmetic);
-
-    @Query("SELECT COUNT(1) FROM cosmetic_table")
-    LiveData<Integer> getDataCount();
 }
