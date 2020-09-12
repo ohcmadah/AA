@@ -72,7 +72,6 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
 
     private void setUp() {
         btnBack.setOnClickListener(goBackPage);
-        btnExceptTime.setButtonDrawable(drawable.checkbox_selector);
         setViewModel();
     }
 
