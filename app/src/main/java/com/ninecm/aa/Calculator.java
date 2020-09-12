@@ -1,18 +1,19 @@
 package com.ninecm.aa;
 
-import java.util.ArrayList;
+import android.util.Log;
+
 import java.util.Calendar;
 import java.util.List;
 
 /* 필요한 변환 혹은 계산을 담은 클래스 */
 public class Calculator {
-    private Calendar endCalendar;
+    private Calendar calendar;
 
     // Constructor
-    public Calculator(int EndYear, int EndMonth, int EndDay) {
-        // 유통기한으로 날짜 설정
-        endCalendar = Calendar.getInstance();
-        endCalendar.set(EndYear, EndMonth - 1, EndDay);
+    public Calculator(int year, int month, int day) {
+        //날짜 설정
+        calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
     }
 
     // 문자열 yyyymmdd로부터 연도를 가져옴
@@ -39,7 +40,14 @@ public class Calculator {
         return day;
     }
 
-    // 날짜나 달이 1글자인지 2글자인지 판별해 포맷을 맞춤
+    public String getDayOfWeek() {
+        String[] koreanList = {"일", "월", "화", "수", "목", "금", "토"};
+        int dayNum = calendar.get(Calendar.DAY_OF_WEEK);
+        String dayOfWeek = koreanList[dayNum-1];
+        return dayOfWeek;
+    }
+
+   // 날짜나 달이 1글자인지 2글자인지 판별해 포맷을 맞춤
     public static String oneToTwo(int notKnow) {
         String result = String.valueOf(notKnow);
         if (result.length() == 1) {
@@ -55,7 +63,7 @@ public class Calculator {
         Calendar today = Calendar.getInstance();
 
         // 86400000 == 1일
-        long endDate = endCalendar.getTimeInMillis() / 86400000;
+        long endDate = calendar.getTimeInMillis() / 86400000;
         long currDate = today.getTimeInMillis() / 86400000;
 
         long count = endDate - currDate;

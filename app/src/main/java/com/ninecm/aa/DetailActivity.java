@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -22,7 +23,9 @@ import static com.ninecm.aa.R.*;
 public class DetailActivity extends AppCompatActivity implements ViewModelStoreOwner {
     private ImageButton btnBack;
     private CheckBox btnExceptTime;
-    private TextView detailText;
+    private TextView textDetailTitle;
+    private TextView textEndDate;
+    private TextView textMemo;
 
     private Cosmetic cosmetic;
     private int starNumber;
@@ -43,7 +46,17 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
         Intent intent = getIntent();
         int id = intent.getExtras().getInt("itemId");
         cosmetic = viewModel.getById(id); // nullPointException
-        detailText.setText(cosmetic.getTitle());
+        textDetailTitle.setText(cosmetic.getTitle());
+
+        int year = Calculator.getYear(cosmetic.getEndDay());
+        int month = Calculator.getMonth(cosmetic.getEndDay());
+        int day = Calculator.getDay(cosmetic.getEndDay());
+        Calculator calculator = new Calculator(year, month, day);
+        String dayOfWeek = calculator.getDayOfWeek();
+        String endDay = year+"년 "+month+"월 "+day+"일 ("+dayOfWeek+")";
+        textEndDate.setText(endDay);
+
+        textMemo.setText(cosmetic.getMemo());
 
         setStar();
 
@@ -52,7 +65,9 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
     private void init() {
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         btnExceptTime = (CheckBox) findViewById(R.id.btn_except_time);
-        detailText = (TextView) findViewById(id.detail_title);
+        textDetailTitle = (TextView) findViewById(id.detail_title);
+        textEndDate = (TextView) findViewById(id.text_end_date);
+        textMemo = (TextView) findViewById(id.text_memo);
     }
 
     private void setUp() {
