@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
 
         Intent intent = getIntent();
         int id = intent.getExtras().getInt("itemId");
-        cosmetic = viewModel.getById(id); // nullPointException
+        cosmetic = viewModel.getById(id);
         textDetailTitle.setText(cosmetic.getTitle());
 
         int year = Calculator.getYear(cosmetic.getEndDay());
