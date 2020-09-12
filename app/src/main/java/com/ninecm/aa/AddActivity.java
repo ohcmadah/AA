@@ -74,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             tvw.setText(picker.getYear() + "년 " + (picker.getMonth()+1) + "월 " + picker.getDayOfMonth() + "일");
-            endDay = String.valueOf(picker.getYear())+Calculator.oneToTwo(picker.getMonth())+Calculator.oneToTwo(picker.getDayOfMonth());
+            endDay = picker.getYear()+Calculator.oneToTwo(picker.getMonth()+1)+Calculator.oneToTwo(picker.getDayOfMonth());
         }
     };
 
