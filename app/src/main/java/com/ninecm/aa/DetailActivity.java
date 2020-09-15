@@ -3,8 +3,6 @@ package com.ninecm.aa;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +18,7 @@ import android.widget.TextView;
 import static com.ninecm.aa.R.*;
 
 
-public class DetailActivity extends AppCompatActivity implements ViewModelStoreOwner {
+public class DetailActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private CheckBox btnExceptTime;
     private TextView textDetailTitle;
@@ -30,8 +28,6 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
     private Cosmetic cosmetic;
     private int starNumber;
 
-    private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
-    private ViewModelStore viewModelStore = new ViewModelStore();
     private MainViewModel viewModel;
 
     @Override
@@ -72,7 +68,9 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
 
     private void setUp() {
         btnBack.setOnClickListener(goBackPage);
-        setViewModel();
+        viewModel = new ViewModelProvider(this,
+                new ViewModelProvider.AndroidViewModelFactory(getApplication()))
+                .get(MainViewModel.class);
     }
 
     private void setStar() {
@@ -94,23 +92,4 @@ public class DetailActivity extends AppCompatActivity implements ViewModelStoreO
             DetailActivity.this.finish();
         }
     };
-
-    public void setViewModel() {
-        if (viewModelFactory == null) {
-            viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication());
-        }
-        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModelStore.clear();
-    }
-
-    @NonNull
-    @Override
-    public ViewModelStore getViewModelStore() {
-        return viewModelStore;
-    }
 }
