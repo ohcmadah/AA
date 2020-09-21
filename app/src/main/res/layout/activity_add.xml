@@ -170,36 +170,45 @@
                         android:text="별점"
                         android:textSize="18sp"
                         android:textColor="@color/black"/>
-
-                    <LinearLayout
+                    
+                    <RatingBar
+                        android:id="@+id/add_star"
+                        style="@style/RatingBar"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:numStars="3"
+                        android:progressTint="@color/black"/>
 
-                        <ImageButton
-                            android:id="@+id/btn_add_star1"
-                            android:layout_width="32dp"
-                            android:layout_height="31dp"
-                            android:scaleType="centerInside"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/star_icon_selector"
-                            android:background="@color/transparent"/>
-                        <ImageButton
-                            android:id="@+id/btn_add_star2"
-                            android:layout_width="32dp"
-                            android:layout_height="31dp"
-                            android:scaleType="centerInside"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/star_icon_selector"
-                            android:background="@color/transparent"/>
-                        <ImageButton
-                            android:id="@+id/btn_add_star3"
-                            android:layout_width="32dp"
-                            android:layout_height="31dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/star_icon_selector"
-                            android:background="@color/transparent"/>
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    </LinearLayout>
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/btn_add_star1"-->
+<!--                            android:layout_width="32dp"-->
+<!--                            android:layout_height="31dp"-->
+<!--                            android:scaleType="centerInside"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            android:src="@drawable/star_icon_selector"-->
+<!--                            android:background="@color/transparent"/>-->
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/btn_add_star2"-->
+<!--                            android:layout_width="32dp"-->
+<!--                            android:layout_height="31dp"-->
+<!--                            android:scaleType="centerInside"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            android:src="@drawable/star_icon_selector"-->
+<!--                            android:background="@color/transparent"/>-->
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/btn_add_star3"-->
+<!--                            android:layout_width="32dp"-->
+<!--                            android:layout_height="31dp"-->
+<!--                            android:scaleType="centerInside"-->
+<!--                            android:src="@drawable/star_icon_selector"-->
+<!--                            android:background="@color/transparent"/>-->
+
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
