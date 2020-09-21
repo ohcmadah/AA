@@ -202,7 +202,9 @@
                     android:id="@+id/btn_except_time"
                     android:layout_width="31dp"
                     android:layout_height="31dp"
-                    android:button="@drawable/checkbox_selector"/>
+                    android:button="@color/transparent"
+                    android:background="@drawable/checkbox_selector"
+                    android:checked="false"/>
 
                 <TextView
                     android:layout_width="wrap_content"

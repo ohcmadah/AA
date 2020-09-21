@@ -2,7 +2,6 @@ package com.ninecm.aa.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,8 +34,6 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
     private TextView emergDday;
     private Activity mainActivity;
 
-    private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
-    private ViewModelStore viewModelStore = new ViewModelStore();
     private MainViewModel viewModel;
 
     private List<Cosmetic> cosmeticList = new ArrayList<>();
@@ -51,7 +47,9 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.time_fragment, container, false);
 
-        setViewModel();
+        viewModel = new ViewModelProvider(this,
+                new ViewModelProvider.AndroidViewModelFactory(mainActivity.getApplication()))
+                .get(MainViewModel.class);
 
         init(view);
 
@@ -72,13 +70,6 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         });
 
         return view;
-    }
-
-    public void setViewModel() {
-        if (viewModelFactory == null) {
-            viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication());
-        }
-        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
     }
 
     public void init(View view) {
@@ -107,24 +98,15 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
             emergTitle.setText(title);
             emergDday.setText(dDay);
 
+            int emergeId = cosmeticList.get(emergIndex).getId();
+
             // emergency 삭제
             cosmeticList.remove(emergIndex);
 
             emergContainer.setVisibility(View.VISIBLE);
+
             // Emergency Card 클릭 Action Event
-            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, emergeId));
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModelStore.clear();
-    }
-
-    @NonNull
-    @Override
-    public ViewModelStore getViewModelStore() {
-        return viewModelStore;
     }
 }

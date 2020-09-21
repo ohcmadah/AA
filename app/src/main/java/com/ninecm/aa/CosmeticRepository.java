@@ -6,10 +6,12 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CosmeticRepository {
     private CosmeticDao cosmeticDao;
     private LiveData<List<Cosmetic>> allCosmetics;
+    private Cosmetic cosmetic;
 
     public CosmeticRepository(Application application) {
         AppDatabase database = AppDatabase.getInstance(application);
@@ -27,6 +29,17 @@ public class CosmeticRepository {
 
     public void delete(Cosmetic cosmetic) {
         new DeleteCosmeticAsyncTask(cosmeticDao).execute(cosmetic);
+    }
+
+    public Cosmetic getById(int id) {
+        try {
+            cosmetic = new GetCosmeticAsyncTask(cosmeticDao).execute(id).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return cosmetic;
     }
 
     public LiveData<List<Cosmetic>> getAll() {
@@ -72,6 +85,21 @@ public class CosmeticRepository {
         protected Void doInBackground(Cosmetic... cosmetics) {
             cosmeticDao.delete(cosmetics[0]);
             return null;
+        }
+    }
+
+    private static class GetCosmeticAsyncTask extends AsyncTask<Integer, Void, Cosmetic> {
+        private CosmeticDao cosmeticDao;
+        private Cosmetic cosmetic;
+
+        public GetCosmeticAsyncTask(CosmeticDao cosmeticDao) {
+            this.cosmeticDao = cosmeticDao;
+        }
+
+        @Override
+        protected Cosmetic doInBackground(Integer... integers) {
+            cosmetic = cosmeticDao.getById(integers[0]);
+            return cosmetic;
         }
     }
 }

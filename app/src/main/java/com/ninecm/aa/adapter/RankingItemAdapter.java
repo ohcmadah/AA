@@ -14,11 +14,12 @@ import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.RankingItemViewHolder> {
 
-    private List<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics = new ArrayList<>();
     private Activity mainActivity;
 
     public static class RankingItemViewHolder extends RecyclerView.ViewHolder {
@@ -36,8 +37,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     }
 
     // Constructor
-    public RankingItemAdapter(List<Cosmetic> cosmetics, Activity mainActivity) {
-        this.cosmetics = cosmetics;
+    public RankingItemAdapter(Activity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
@@ -70,8 +70,15 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.rankingTitle.setText(title);
 
-        // onClick event
-        holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+        if (title != "제품을 추가해주세요") {
+            // onClick event
+            holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, cosmetics.get(position).getId()));
+        }
+    }
+
+    public void setCosmetics(List<Cosmetic> cosmetics) {
+        this.cosmetics = cosmetics;
+        notifyDataSetChanged();
     }
 
     // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환

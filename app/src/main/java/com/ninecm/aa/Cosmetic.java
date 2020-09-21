@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 /* 관리할 품목 클래스 */
 @Entity(tableName = "cosmetic_table")
-public class Cosmetic {
+public class Cosmetic implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String title;
     private String endDay;
     private int star;

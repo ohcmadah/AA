@@ -87,8 +87,9 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         holder.timeTitle.setText(title);
         holder.timeDday.setText(dDay);
 
+        int id = cosmetics.get(position).getId();
         // onClick event
-        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, 1));
+        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, id));
     }
 
     public void setCosmetics(List<Cosmetic> cosmetics) {

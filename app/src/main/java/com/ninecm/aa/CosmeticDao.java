@@ -14,6 +14,9 @@ public interface CosmeticDao {
     @Query("SELECT * FROM cosmetic_table")
     LiveData<List<Cosmetic>> getAll();
 
+    @Query("SELECT * FROM cosmetic_table WHERE id=:id")
+    Cosmetic getById(int id);
+
     @Insert
     void insert(Cosmetic cosmetic);
 
@@ -22,7 +25,4 @@ public interface CosmeticDao {
 
     @Delete
     void delete(Cosmetic cosmetic);
-
-    @Query("SELECT COUNT(1) FROM cosmetic_table")
-    LiveData<Integer> getDataCount();
 }
