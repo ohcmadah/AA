@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+import androidx.annotation.Dimension;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +44,8 @@ public class AddActivity extends AppCompatActivity {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
         init();
-
         setUp();
+
     }
 
 
@@ -55,9 +57,9 @@ public class AddActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.btn_add);
         inputTitle = (EditText) findViewById(R.id.input_title);
         inputMemo = (EditText) findViewById(R.id.input_memo);
-        btnAddStar1 = (ImageButton) findViewById(R.id.btn_add_star1);
-        btnAddStar2 = (ImageButton) findViewById(R.id.btn_add_star2);
-        btnAddStar3 = (ImageButton) findViewById(R.id.btn_add_star3);
+//        btnAddStar1 = (ImageButton) findViewById(R.idd.btn_add_star1);
+//        btnAddStar2 = (ImageButton) findViewById(R.id.btn_add_star2);
+//        btnAddStar3 = (ImageButton) findViewById(R.id.btn_add_star3);
     }
 
     private void setUp() {
@@ -65,9 +67,9 @@ public class AddActivity extends AppCompatActivity {
         btnGet.setOnClickListener(setTextEndDay);
         btnAdd.setOnClickListener(saveItem);
         starNum = 0;
-        btnAddStar1.setOnClickListener(setStar);
-        btnAddStar2.setOnClickListener(setStar);
-        btnAddStar3.setOnClickListener(setStar);
+//        btnAddStar1.setOnClickListener(setStar);
+//        btnAddStar2.setOnClickListener(setStar);
+//        btnAddStar3.setOnClickListener(setStar);
     }
 
     View.OnClickListener setTextEndDay = new View.OnClickListener() {
@@ -126,43 +128,43 @@ public class AddActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener setStar = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_add_star1:
-                    btnAddStar1.setSelected(true);
-                    calStarNum(1);
-                    break;
-                case R.id.btn_add_star2:
-                    btnAddStar2.setSelected(true);
-                    calStarNum(2);
-                    break;
-                case R.id.btn_add_star3:
-                    btnAddStar3.setSelected(true);
-                    calStarNum(3);
-                    break;
-            }
-        }
-    };
-
-    private void calStarNum(int star) {
-        if (starNum == star-1) {
-            starNum = star;
-
-        } else {
-            if (starNum == star) starNum -= 1;
-            switch (star) {
-                case 1:
-                    btnAddStar1.setSelected(false);
-                    break;
-                case 2:
-                    btnAddStar2.setSelected(false);
-                    break;
-                case 3:
-                    btnAddStar3.setSelected(false);
-                    break;
-            }
-        }
-    }
+//    View.OnClickListener setStar = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            switch (view.getId()) {
+//                case R.id.btn_add_star1:
+//                    btnAddStar1.setSelected(true);
+//                    calStarNum(1);
+//                    break;
+//                case R.id.btn_add_star2:
+//                    btnAddStar2.setSelected(true);
+//                    calStarNum(2);
+//                    break;
+//                case R.id.btn_add_star3:
+//                    btnAddStar3.setSelected(true);
+//                    calStarNum(3);
+//                    break;
+//            }
+//        }
+//    };
+//
+//    private void calStarNum(int star) {
+//        if (starNum == star-1) {
+//            starNum = star;
+//
+//        } else {
+//            if (starNum == star) starNum -= 1;
+//            switch (star) {
+//                case 1:
+//                    btnAddStar1.setSelected(false);
+//                    break;
+//                case 2:
+//                    btnAddStar2.setSelected(false);
+//                    break;
+//                case 3:
+//                    btnAddStar3.setSelected(false);
+//                    break;
+//            }
+//        }
+//    }
 }
