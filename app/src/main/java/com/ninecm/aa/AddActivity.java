@@ -1,6 +1,5 @@
 package com.ninecm.aa;
 
-import androidx.annotation.Dimension;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +14,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +69,7 @@ public class AddActivity extends AppCompatActivity {
     RatingBar.OnRatingBarChangeListener clickStar = new RatingBar.OnRatingBarChangeListener() {
         @Override
         public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-            Log.d("Mytag", String.valueOf(v));
+            Log.d("MyTag", String.valueOf(v));
             starNum = (int) v;
         }
     };
@@ -129,6 +127,7 @@ public class AddActivity extends AppCompatActivity {
                 AddActivity.this.finish();
                 overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
             }
+
         }
     };
 }

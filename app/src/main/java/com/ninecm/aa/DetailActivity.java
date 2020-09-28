@@ -1,12 +1,10 @@
 package com.ninecm.aa;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -74,16 +72,15 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setStar() {
-        ImageView iv = new ImageView(this);
+        ImageView star = new ImageView(this);
         LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
 
-        iv.setLayoutParams(new ViewGroup.LayoutParams(
+        star.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         );
-        iv.setImageResource(drawable.star_icon);
-
-        starContainer.addView(iv);
+        star.setImageResource(drawable.star_icon);
+        starContainer.addView(star);
     }
 
     View.OnClickListener goBackPage = new View.OnClickListener() {
