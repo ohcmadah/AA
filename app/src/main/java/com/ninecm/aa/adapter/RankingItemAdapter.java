@@ -79,7 +79,6 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
     public void setCosmetics(List<Cosmetic> cosmetics) {
         this.cosmetics.clear();
-        this.cosmetics = new ArrayList<>();
         this.cosmetics = cosmetics;
         this.notifyDataSetChanged();
     }

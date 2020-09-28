@@ -58,9 +58,9 @@ public class RankingFragment extends Fragment {
         // 기본 눌려진 버튼
         btnThreeStar.setSelected(true);
         // 버튼 액션 리스너 추가
-        btnThreeStar.setOnTouchListener(changeStarPage);
-        btnTwoStar.setOnTouchListener(changeStarPage);
-        btnOneStar.setOnTouchListener(changeStarPage);
+        btnThreeStar.setOnClickListener(changeStar);
+        btnTwoStar.setOnClickListener(changeStar);
+        btnOneStar.setOnClickListener(changeStar);
 
         // RecyclerView Adapter 생성
         rankingItemAdapter = new RankingItemAdapter(mainActivity);
@@ -71,8 +71,7 @@ public class RankingFragment extends Fragment {
 
         viewModel.getAll().observe(this, dbCosmetics -> {
             cosmetics = dbCosmetics;
-            List<Cosmetic> changedCosmetics = calStarPage(dbCosmetics, 3);
-            rankingItemAdapter.setCosmetics(changedCosmetics);
+            rankingItemAdapter.setCosmetics(calStarPage(dbCosmetics, 3));
         });
 
         return view;
@@ -97,44 +96,40 @@ public class RankingFragment extends Fragment {
             cosmeticList.add(cosmetic);
         }
 
-
-        return cosmeticList;
+        return cosmetics;
     }
 
-    View.OnTouchListener changeStarPage = new View.OnTouchListener() {
+    View.OnClickListener changeStar = new View.OnClickListener() {
+
         @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
+        public void onClick(View view) {
             List<Cosmetic> changedCosmetics = new ArrayList<>();
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                switch (view.getId()) {
-                    case R.id.btn_three_star:
-                        btnTwoStar.setSelected(false);
-                        btnOneStar.setSelected(false);
-                        btnThreeStar.setSelected(true);
+            switch (view.getId()) {
+                case R.id.btn_three_star:
+                    btnTwoStar.setSelected(false);
+                    btnOneStar.setSelected(false);
+                    btnThreeStar.setSelected(true);
 
-                        changedCosmetics = calStarPage(cosmetics, 3);
-                        break;
+                    changedCosmetics = calStarPage(cosmetics, 3);
+                    break;
 
-                    case R.id.btn_two_star:
-                        btnThreeStar.setSelected(false);
-                        btnOneStar.setSelected(false);
-                        btnTwoStar.setSelected(true);
+                case R.id.btn_two_star:
+                    btnThreeStar.setSelected(false);
+                    btnOneStar.setSelected(false);
+                    btnTwoStar.setSelected(true);
 
-                        changedCosmetics = calStarPage(cosmetics, 2);
-                        break;
+                    changedCosmetics = calStarPage(cosmetics, 2);
+                    break;
 
-                    case R.id.btn_one_star:
-                        btnThreeStar.setSelected(false);
-                        btnTwoStar.setSelected(false);
-                        btnOneStar.setSelected(true);
+                case R.id.btn_one_star:
+                    btnThreeStar.setSelected(false);
+                    btnTwoStar.setSelected(false);
+                    btnOneStar.setSelected(true);
 
-                        changedCosmetics = calStarPage(cosmetics, 1);
-                        break;
-                }
+                    changedCosmetics = calStarPage(cosmetics, 1);
+                    break;
             }
             rankingItemAdapter.setCosmetics(changedCosmetics);
-
-            return false;
         }
     };
 }
