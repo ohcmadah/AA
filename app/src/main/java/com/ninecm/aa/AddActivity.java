@@ -65,14 +65,16 @@ public class AddActivity extends AppCompatActivity {
         btnGet.setOnClickListener(setTextEndDay);
         btnAdd.setOnClickListener(saveItem);
         starNum = 0;
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Log.d("Mytag", String.valueOf(v));
-                starNum = (int) v;
-            }
-        });
+        ratingBar.setOnRatingBarChangeListener(clickStar);
     }
+
+    RatingBar.OnRatingBarChangeListener clickStar = new RatingBar.OnRatingBarChangeListener() {
+        @Override
+        public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+            Log.d("Mytag", String.valueOf(v));
+            starNum = (int) v;
+        }
+    };
 
     View.OnClickListener setTextEndDay = new View.OnClickListener() {
         @Override
