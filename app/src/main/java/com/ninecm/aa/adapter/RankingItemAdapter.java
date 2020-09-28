@@ -1,6 +1,7 @@
 package com.ninecm.aa.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,8 +78,10 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
     }
 
     public void setCosmetics(List<Cosmetic> cosmetics) {
+        this.cosmetics.clear();
+        this.cosmetics = new ArrayList<>();
         this.cosmetics = cosmetics;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     // 몇 개의 Item을 목록에 띄워야 하는지 갯수 반환

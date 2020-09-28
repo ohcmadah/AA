@@ -87,17 +87,17 @@ public class RankingFragment extends Fragment {
 
     private List<Cosmetic> calStarPage(List<Cosmetic> cosmeticList, int starNum) {
         List<Cosmetic> cosmetics = new ArrayList<>();
-        boolean addedData = false;
         for (int i = 0; i < cosmeticList.size(); i++) {
-            if (cosmeticList.get(i).getStar() != starNum) {
+            if (cosmeticList.get(i).getStar() == starNum) {
                 cosmetics.add(cosmeticList.get(i));
-                addedData = true;
             }
         }
-        if (!addedData) {
+        if (cosmeticList == null) {
             Cosmetic cosmetic = new Cosmetic("제품을 추가해주세요.", "", 0, "");
-            cosmetics.add(cosmetic);
+            cosmeticList.add(cosmetic);
         }
+
+
         return cosmeticList;
     }
 
