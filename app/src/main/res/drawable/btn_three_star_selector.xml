@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- selected -->
-    <item android:state_selected="true"
-        android:drawable="@drawable/btn_three_star" />
-    <!-- pressed -->
+     <!-- pressed -->
     <item android:state_pressed="true"
         android:drawable="@drawable/btn_three_star" />
-    <!-- focused -->
-    <item android:state_focused="true"
-        android:drawable="@drawable/btn_three_star" />
-    <!-- default -->
+     <!-- default -->
     <item android:drawable="@drawable/btn_empty_three_star" />
 </selector>
