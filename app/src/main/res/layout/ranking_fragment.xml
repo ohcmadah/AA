@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:padding="0dp"
             android:layout_marginEnd="8dp"
-            android:focusableInTouchMode="true"
             android:background="@color/transparent"
             android:src="@drawable/btn_three_star_selector" />
 
@@ -28,7 +27,6 @@
             android:layout_height="wrap_content"
             android:padding="0dp"
             android:layout_marginEnd="8dp"
-            android:focusableInTouchMode="true"
             android:background="@color/transparent"
             android:src="@drawable/btn_two_star_selector" />
 
@@ -37,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
-            android:focusableInTouchMode="true"
             android:background="@color/transparent"
             android:src="@drawable/btn_one_star_selector" />
 
