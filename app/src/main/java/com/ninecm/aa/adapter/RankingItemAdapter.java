@@ -76,7 +76,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.rankingTitle.setText(title);
 
-        if (title != "제품을 추가해주세요") {
+        if (!title.equals("제품을 추가해주세요")) {
             // onClick event
             holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, cosmetics.get(position).getId()));
         }
