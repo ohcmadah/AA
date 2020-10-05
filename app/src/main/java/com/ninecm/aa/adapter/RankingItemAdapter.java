@@ -65,6 +65,11 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
             holder.rankingDivider.setVisibility(View.GONE);
         }
 
+        //아이템 1개일 때
+        if (cosmetics.size() == 1) {
+            holder.rankingItemContainer.setBackgroundResource(R.drawable.blue_roundrect);
+        }
+
         // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
 
