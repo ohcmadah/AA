@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- pressed -->
-    <item android:state_pressed="true"
+   <!-- selected -->
+    <item android:state_selected="true"
         android:drawable="@drawable/btn_one_star" />
-     <!-- default -->
+    <!-- default -->
     <item android:drawable="@drawable/btn_empty_one_star" />
 </selector>

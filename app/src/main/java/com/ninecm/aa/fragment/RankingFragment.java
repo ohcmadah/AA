@@ -56,7 +56,7 @@ public class RankingFragment extends Fragment {
 
         // set up
         // 기본 눌려진 버튼
-        btnThreeStar.setPressed(true);
+        btnThreeStar.setSelected(true);
         // 버튼 액션 리스너 추가
         btnThreeStar.setOnClickListener(changeStar);
         btnTwoStar.setOnClickListener(changeStar);
@@ -100,21 +100,29 @@ public class RankingFragment extends Fragment {
     }
 
     View.OnClickListener changeStar = new View.OnClickListener() {
-
         @Override
         public void onClick(View view) {
             List<Cosmetic> changedCosmetics = new ArrayList<>();
-            btnThreeStar.setPressed(false);
+            btnThreeStar.setSelected(false);
             switch (view.getId()) {
                 case R.id.btn_three_star:
+                    btnThreeStar.setSelected(true);
+                    btnTwoStar.setSelected(false);
+                    btnOneStar.setSelected(false);
                     changedCosmetics = calStarPage(cosmetics, 3);
                     break;
 
                 case R.id.btn_two_star:
+                    btnThreeStar.setSelected(false);
+                    btnTwoStar.setSelected(true);
+                    btnOneStar.setSelected(false);
                     changedCosmetics = calStarPage(cosmetics, 2);
                     break;
 
                 case R.id.btn_one_star:
+                    btnThreeStar.setSelected(false);
+                    btnTwoStar.setSelected(false);
+                    btnOneStar.setSelected(true);
                     changedCosmetics = calStarPage(cosmetics, 1);
                     break;
             }
