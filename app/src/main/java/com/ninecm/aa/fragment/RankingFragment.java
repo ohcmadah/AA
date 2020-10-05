@@ -100,24 +100,22 @@ public class RankingFragment extends Fragment {
     }
 
     View.OnClickListener changeStar = new View.OnClickListener() {
-
         @Override
         public void onClick(View view) {
             List<Cosmetic> changedCosmetics = new ArrayList<>();
+            btnThreeStar.setSelected(false);
             switch (view.getId()) {
                 case R.id.btn_three_star:
+                    btnThreeStar.setSelected(true);
                     btnTwoStar.setSelected(false);
                     btnOneStar.setSelected(false);
-                    btnThreeStar.setSelected(true);
-
                     changedCosmetics = calStarPage(cosmetics, 3);
                     break;
 
                 case R.id.btn_two_star:
                     btnThreeStar.setSelected(false);
-                    btnOneStar.setSelected(false);
                     btnTwoStar.setSelected(true);
-
+                    btnOneStar.setSelected(false);
                     changedCosmetics = calStarPage(cosmetics, 2);
                     break;
 
@@ -125,7 +123,6 @@ public class RankingFragment extends Fragment {
                     btnThreeStar.setSelected(false);
                     btnTwoStar.setSelected(false);
                     btnOneStar.setSelected(true);
-
                     changedCosmetics = calStarPage(cosmetics, 1);
                     break;
             }
