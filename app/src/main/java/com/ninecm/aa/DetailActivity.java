@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getExtras().getInt("itemId");
+        starNumber = intent.getExtras().getInt("starNum");
         cosmetic = viewModel.getById(id);
         textDetailTitle.setText(cosmetic.getTitle());
 
@@ -72,15 +73,17 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setStar() {
-        ImageView star = new ImageView(this);
-        LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
+        for (int i = 0; i < starNumber; i++) {
+            ImageView star = new ImageView(this);
+            LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
 
-        star.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-        );
-        star.setImageResource(drawable.star_icon);
-        starContainer.addView(star);
+            star.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT)
+            );
+            star.setImageResource(drawable.star_icon);
+            starContainer.addView(star);
+        }
     }
 
     View.OnClickListener goBackPage = new View.OnClickListener() {
