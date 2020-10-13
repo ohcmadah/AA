@@ -99,6 +99,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
             emergDday.setText(dDay);
 
             int emergeId = cosmeticList.get(emergIndex).getId();
+            int startNum = cosmeticList.get(emergIndex).getStar();
 
             // emergency 삭제
             cosmeticList.remove(emergIndex);
@@ -106,7 +107,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
             emergContainer.setVisibility(View.VISIBLE);
 
             // Emergency Card 클릭 Action Event
-            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, emergeId));
+            emergContainer.setOnClickListener(new ItemClickListener(mainActivity, emergeId, startNum));
         }
     }
 }

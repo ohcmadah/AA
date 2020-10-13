@@ -82,6 +82,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         String dDay = calculator.stringDday(dCount);
         // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
+        int startNum = cosmetics.get(position).getStar();
 
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.timeTitle.setText(title);
@@ -89,7 +90,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
         int id = cosmetics.get(position).getId();
         // onClick event
-        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, id));
+        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, id, startNum));
     }
 
     public void setCosmetics(List<Cosmetic> cosmetics) {
