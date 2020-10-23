@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,8 @@ import com.ninecm.aa.MainViewModel;
 import com.ninecm.aa.R;
 import com.ninecm.aa.adapter.RankingItemAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class RankingFragment extends Fragment {
     private ImageButton btnThreeStar;
     private ImageButton btnTwoStar;
     private ImageButton btnOneStar;
+    private TextView rankingTitle;
 
     private List<Cosmetic> cosmetics;
 
@@ -82,6 +86,7 @@ public class RankingFragment extends Fragment {
         btnThreeStar = (ImageButton) view.findViewById(R.id.btn_three_star);
         btnTwoStar = (ImageButton) view.findViewById(R.id.btn_two_star);
         btnOneStar = (ImageButton) view.findViewById(R.id.btn_one_star);
+        rankingTitle = (TextView) view.findViewById(R.id.ranking_title);
     }
 
     private List<Cosmetic> calStarPage(List<Cosmetic> cosmeticList, int starNum) {
@@ -91,9 +96,9 @@ public class RankingFragment extends Fragment {
                 cosmetics.add(cosmeticList.get(i));
             }
         }
-        if (cosmeticList == null) {
-            Cosmetic cosmetic = new Cosmetic("제품을 추가해주세요.", "", 0, "");
-            cosmeticList.add(cosmetic);
+        if (cosmetics == null) {
+            Cosmetic cosmetic = new Cosmetic("제품을 추가해주세요", "", starNum, "");
+            cosmetics.add(cosmetic);
         }
 
         return cosmetics;
