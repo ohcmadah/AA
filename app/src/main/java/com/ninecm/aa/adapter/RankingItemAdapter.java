@@ -51,6 +51,11 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RankingItemViewHolder holder, int position) {
+        holder.rankingDivider.setVisibility(View.VISIBLE);
+        if (position == cosmetics.size() - 2) {
+            holder.rankingItemContainer.setBackgroundResource(R.color.main);
+        }
+
         // 첫 번째 목록일 때
         if (position == 0) {
             // 위쪽 모서리 둥근 사각형으로 배경 설정
@@ -68,6 +73,7 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         //아이템 1개일 때
         if (cosmetics.size() == 1) {
             holder.rankingItemContainer.setBackgroundResource(R.drawable.blue_roundrect);
+            holder.rankingDivider.setVisibility(View.GONE);
         }
 
         // 물품 제목 가져옴
