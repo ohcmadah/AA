@@ -6,8 +6,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -50,6 +53,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getExtras().getInt("itemId");
+        starNumber = intent.getExtras().getInt("starNum");
         cosmetic = viewModel.getById(id);
         textDetailTitle.setText(cosmetic.getTitle());
 
@@ -118,15 +122,18 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setStar() {
-        ImageView star = new ImageView(this);
-        LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
+        for (int i = 0; i < starNumber; i++) {
+            ImageView star = new ImageView(this);
+            LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
 
-        star.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-        );
-        star.setImageResource(drawable.star_icon);
-        starContainer.addView(star);
+            star.setImageResource(drawable.star_icon);
+            int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
+            int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+            star.setLayoutParams(params);
+            star.setScaleType(ImageView.ScaleType.FIT_START);
+            starContainer.addView(star);
+        }
     }
 
     View.OnClickListener goBackPage = view -> DetailActivity.this.finish();

@@ -51,6 +51,11 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RankingItemViewHolder holder, int position) {
+        holder.rankingDivider.setVisibility(View.VISIBLE);
+        if (position == cosmetics.size() - 2) {
+            holder.rankingItemContainer.setBackgroundResource(R.color.main);
+        }
+
         // 첫 번째 목록일 때
         if (position == 0) {
             // 위쪽 모서리 둥근 사각형으로 배경 설정
@@ -68,17 +73,19 @@ public class RankingItemAdapter extends RecyclerView.Adapter<RankingItemAdapter.
         //아이템 1개일 때
         if (cosmetics.size() == 1) {
             holder.rankingItemContainer.setBackgroundResource(R.drawable.blue_roundrect);
+            holder.rankingDivider.setVisibility(View.GONE);
         }
 
         // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
+        int startNum = cosmetics.get(position).getStar();
 
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.rankingTitle.setText(title);
 
-        if (title != "제품을 추가해주세요") {
+        if (!title.equals("제품을 추가해주세요")) {
             // onClick event
-            holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, cosmetics.get(position).getId()));
+            holder.rankingItemContainer.setOnClickListener(new ItemClickListener(mainActivity, cosmetics.get(position).getId(), startNum));
         }
     }
 

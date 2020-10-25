@@ -53,25 +53,33 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
     @Override
     public void onBindViewHolder(@NonNull TimeItemViewHolder holder, int position) {
-        if (cosmetics.size() == 1) {
-            // 둥근 사각형으로 배경 설정
-            holder.timeItemContainer.setBackgroundResource(R.drawable.black_solid_round_rect);
+        holder.divider.setVisibility(View.VISIBLE);
+        if (position == cosmetics.size() - 2) {
+            holder.timeItemContainer.setBackgroundResource(R.drawable.side_black_stroke);
             // divider 안 보이도록 설정
             holder.divider.setVisibility(View.GONE);
-        } else {
-            // 첫 번째 목록일 때
-            if (position == 0) {
-                // 윗쪽 모서리 둥근 사각형으로 배경 설정
-                holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_top);
-            }
+        }
 
-            // 마지막 목록일 때
-            if (position == cosmetics.size() - 1) {
-                // 아래쪽 모서리 둥근 사각형으로 배경 설정
-                holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_bottom);
-                // divider 안 보이도록 설정
-                holder.divider.setVisibility(View.GONE);
-            }
+        // 첫 번째 목록일 때
+        if (position == 0) {
+            // 위쪽 모서리 둥근 사각형으로 배경 설정
+            holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_top);
+            // divider 안 보이도록 설정
+            holder.divider.setVisibility(View.GONE);
+        }
+
+        // 마지막 목록일 때
+        if (position == cosmetics.size() - 1) {
+            // 아래쪽 모서리 둥근 사각형으로 배경 설정
+            holder.timeItemContainer.setBackgroundResource(R.drawable.round_corner_bottom);
+            // divider 안 보이도록 설정
+            holder.divider.setVisibility(View.GONE);
+        }
+
+        //아이템 1개일 때
+        if (cosmetics.size() == 1) {
+            holder.timeItemContainer.setBackgroundResource(R.drawable.black_solid_round_rect);
+            holder.divider.setVisibility(View.GONE);
         }
 
         // Calculator의 Calendar 생성
@@ -82,6 +90,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
         String dDay = calculator.stringDday(dCount);
         // 물품 제목 가져옴
         String title = cosmetics.get(position).getTitle();
+        int startNum = cosmetics.get(position).getStar();
 
         // 구한 D-Day, 물품 제목으로 TextView 설정
         holder.timeTitle.setText(title);
@@ -89,7 +98,7 @@ public class TimeItemAdapter extends RecyclerView.Adapter<TimeItemAdapter.TimeIt
 
         int id = cosmetics.get(position).getId();
         // onClick event
-        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, id));
+        holder.timeItemContainer.setOnClickListener(new ItemClickListener(mainActivity, id, startNum));
     }
 
     public void setCosmetics(List<Cosmetic> cosmetics) {
