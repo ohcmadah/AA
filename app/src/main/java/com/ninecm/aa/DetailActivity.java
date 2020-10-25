@@ -84,7 +84,9 @@ public class DetailActivity extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                viewModel.delete(cosmetic);
                                 DetailActivity.this.finish();
+                                Toast.makeText(getApplicationContext(), "제품이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                 overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
                             }
                         })
@@ -98,10 +100,6 @@ public class DetailActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
 
     private void init() {
         btnBack = (ImageButton) findViewById(R.id.btn_back);
@@ -131,10 +129,5 @@ public class DetailActivity extends AppCompatActivity {
         starContainer.addView(star);
     }
 
-    View.OnClickListener goBackPage = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            DetailActivity.this.finish();
-        }
-    };
+    View.OnClickListener goBackPage = view -> DetailActivity.this.finish();
 }
