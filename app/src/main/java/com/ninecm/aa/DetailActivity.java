@@ -1,13 +1,10 @@
 package com.ninecm.aa;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,7 +84,8 @@ public class DetailActivity extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                DetailActivity.this.finish();
+                                overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -100,6 +98,8 @@ public class DetailActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
 
