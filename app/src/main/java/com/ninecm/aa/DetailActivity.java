@@ -70,7 +70,6 @@ public class DetailActivity extends AppCompatActivity {
         setStar();
 
         //디비생성
-        AppDatabase db = AppDatabase.getInstance(this);
 
 
         btnDel.setOnClickListener(new View.OnClickListener() {
