@@ -2,17 +2,13 @@ package com.ninecm.aa;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -68,9 +64,6 @@ public class DetailActivity extends AppCompatActivity {
         textMemo.setText(cosmetic.getMemo());
 
         setStar();
-
-        //디비생성
-
 
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
