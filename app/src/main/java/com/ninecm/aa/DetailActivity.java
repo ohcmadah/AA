@@ -72,13 +72,6 @@ public class DetailActivity extends AppCompatActivity {
         //디비생성
         AppDatabase db = AppDatabase.getInstance(this);
 
-        //UI 갱신 (라이브데이터 Observer 이용, 해당 디비값이 변화가생기면 실행됨)
-        db.cosmeticDao().getAll().observe(this, new Observer<List<Cosmetic>>() {
-            @Override
-            public void onChanged(List<Cosmetic> cosmetics) {
-
-            }
-        });
 
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
