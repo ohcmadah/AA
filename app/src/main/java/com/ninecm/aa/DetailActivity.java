@@ -1,8 +1,11 @@
 package com.ninecm.aa;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,19 +18,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.ninecm.aa.R.*;
 
 
 public class DetailActivity extends AppCompatActivity {
     private ImageButton btnBack;
+    private ImageButton btnDel;
     private CheckBox btnExceptTime;
     private TextView textDetailTitle;
     private TextView textEndDate;
     private TextView textMemo;
 
+
     private Cosmetic cosmetic;
     private int starNumber;
+
+    private List<Cosmetic> cosmeticList = new ArrayList<>();
 
     private MainViewModel viewModel;
 
@@ -58,11 +69,38 @@ public class DetailActivity extends AppCompatActivity {
 
         setStar();
 
+        //디비생성
+
+
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(DetailActivity.this)
+                        .setMessage("제품을 삭제하시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                viewModel.delete(cosmetic);
+                                DetailActivity.this.finish();
+                                Toast.makeText(getApplicationContext(), "제품이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getApplicationContext(), "취소를 누르셨습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
+
     }
 
     private void init() {
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         btnExceptTime = (CheckBox) findViewById(R.id.btn_except_time);
+        btnDel = findViewById(id.btn_delete);
         textDetailTitle = (TextView) findViewById(id.detail_title);
         textEndDate = (TextView) findViewById(id.text_end_date);
         textMemo = (TextView) findViewById(id.text_memo);
@@ -90,10 +128,5 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener goBackPage = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            DetailActivity.this.finish();
-        }
-    };
+    View.OnClickListener goBackPage = view -> DetailActivity.this.finish();
 }
