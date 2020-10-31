@@ -23,6 +23,9 @@ public class AddActivity extends AppCompatActivity {
     public static final String EXTRA_END_DAY = "com.ninecm.aa.EXTRA_END_DAY";
     public static final String EXTRA_STAR = "com.ninecm.aa.EXTRA_STAR";
     public static final String EXTRA_MEMO = "com.ninecm.aa.EXTRA_MEMO";
+    public static final String EXTRA_ITEM_ID = "com.ninecm.aa.EXTRA_ITEM_ID";
+
+    private boolean editFlag;
 
     private DatePicker picker;
     private Button btnGet;
@@ -32,8 +35,12 @@ public class AddActivity extends AppCompatActivity {
     private EditText inputTitle;
     private EditText inputMemo;
     private RatingBar ratingBar;
+
     private int starNum;
     private String endDay;
+    private String title;
+    private String memo;
+    private int itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +49,8 @@ public class AddActivity extends AppCompatActivity {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
         init();
-        setUp();
 
+        setUp();
     }
 
 
@@ -64,12 +71,26 @@ public class AddActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(saveItem);
         starNum = 0;
         ratingBar.setOnRatingBarChangeListener(clickStar);
+
+        Intent intent = getIntent();
+        editFlag = intent.getBooleanExtra("editFlag", false);
+        if (editFlag) {
+            title = intent.getStringExtra("title");
+            endDay = intent.getStringExtra("endDay");
+            memo = intent.getStringExtra("memo");
+            starNum = intent.getIntExtra("starNum", 0);
+            itemId = intent.getIntExtra("itemId", -1);
+
+            inputTitle.setText(title);
+            tvw.setText(Calculator.getYear(endDay)+"년 "+Calculator.oneToTwo(Calculator.getMonth(endDay))+"월 "+Calculator.oneToTwo(Calculator.getDay(endDay))+"일");
+            inputMemo.setText(memo);
+            ratingBar.setRating(starNum);
+        }
     }
 
     RatingBar.OnRatingBarChangeListener clickStar = new RatingBar.OnRatingBarChangeListener() {
         @Override
         public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-            Log.d("MyTag", String.valueOf(v));
             starNum = (int) v;
         }
     };
@@ -86,9 +107,13 @@ public class AddActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             // 경고 다이얼로그 띄우기
+            String msg = "제품 등록을 취소하시겠습니까?";
+            if (editFlag) {
+                msg = "제품 수정을 취소하시겠습니까?";
+            }
 
             new AlertDialog.Builder(AddActivity.this)
-                    .setMessage("제품 등록을 취소하시겠습니까?")
+                    .setMessage(msg)
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -109,8 +134,8 @@ public class AddActivity extends AppCompatActivity {
     View.OnClickListener saveItem = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String title = inputTitle.getText().toString().trim();
-            String memo = inputMemo.getText().toString().trim();
+            title = inputTitle.getText().toString().trim();
+            memo = inputMemo.getText().toString().trim();
 
             if (title.length() == 0 || starNum == 0 || endDay.length() == 0) {
                 Toast toast = Toast.makeText(getApplicationContext(), "제품명, 유통기한, 별점은 필수 항목입니다.", Toast.LENGTH_SHORT);
@@ -121,11 +146,16 @@ public class AddActivity extends AppCompatActivity {
                 data.putExtra(EXTRA_END_DAY, endDay);
                 data.putExtra(EXTRA_STAR, starNum);
                 data.putExtra(EXTRA_MEMO, memo);
+                if (editFlag) {
+                    data.putExtra(EXTRA_ITEM_ID, itemId);
+                }
 
                 setResult(RESULT_OK, data);
 
                 AddActivity.this.finish();
-                overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+                if (!editFlag) {
+                    overridePendingTransition(R.anim.anim_stay, R.anim.anim_slide_down);
+                }
             }
 
         }
