@@ -1,5 +1,6 @@
 package com.ninecm.aa;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,8 +24,11 @@ import static com.ninecm.aa.R.*;
 
 
 public class DetailActivity extends AppCompatActivity {
+    public static final int ADD_COSMETIC_REQUEST = 1;
+
     private ImageButton btnBack;
     private ImageButton btnDel;
+    private ImageButton btnEdit;
     private CheckBox btnExceptTime;
     private TextView textDetailTitle;
     private TextView textEndDate;
@@ -32,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
     private Cosmetic cosmetic;
-    private int starNumber;
+    private int itemId;
 
     private List<Cosmetic> cosmeticList = new ArrayList<>();
 
@@ -48,22 +52,10 @@ public class DetailActivity extends AppCompatActivity {
         setUp();
 
         Intent intent = getIntent();
-        int id = intent.getExtras().getInt("itemId");
-        starNumber = intent.getExtras().getInt("starNum");
-        cosmetic = viewModel.getById(id);
-        textDetailTitle.setText(cosmetic.getTitle());
+        itemId = intent.getExtras().getInt("itemId");
+        cosmetic = viewModel.getById(itemId);
 
-        int year = Calculator.getYear(cosmetic.getEndDay());
-        int month = Calculator.getMonth(cosmetic.getEndDay());
-        int day = Calculator.getDay(cosmetic.getEndDay());
-        Calculator calculator = new Calculator(year, month, day);
-        String dayOfWeek = calculator.getDayOfWeek();
-        String endDay = year+"년 "+month+"월 "+day+"일 ("+dayOfWeek+")";
-        textEndDate.setText(endDay);
-
-        textMemo.setText(cosmetic.getMemo());
-
-        setStar();
+        setScreen();
 
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +86,7 @@ public class DetailActivity extends AppCompatActivity {
         btnBack = (ImageButton) findViewById(R.id.btn_back);
         btnExceptTime = (CheckBox) findViewById(R.id.btn_except_time);
         btnDel = findViewById(id.btn_delete);
+        btnEdit = findViewById(id.btn_edit);
         textDetailTitle = (TextView) findViewById(id.detail_title);
         textEndDate = (TextView) findViewById(id.text_end_date);
         textMemo = (TextView) findViewById(id.text_memo);
@@ -104,12 +97,30 @@ public class DetailActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this,
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(MainViewModel.class);
+        btnEdit.setOnClickListener(editCosmetic);
+    }
+
+    private void setScreen() {
+        textDetailTitle.setText(cosmetic.getTitle());
+
+        int year = Calculator.getYear(cosmetic.getEndDay());
+        int month = Calculator.getMonth(cosmetic.getEndDay());
+        int day = Calculator.getDay(cosmetic.getEndDay());
+        Calculator calculator = new Calculator(year, month, day);
+        String dayOfWeek = calculator.getDayOfWeek();
+        String endDay = year+"년 "+Calculator.oneToTwo(month)+"월 "+Calculator.oneToTwo(day)+"일 ("+dayOfWeek+")";
+        textEndDate.setText(endDay);
+
+        textMemo.setText(cosmetic.getMemo());
+
+        setStar();
     }
 
     private void setStar() {
-        for (int i = 0; i < starNumber; i++) {
+        LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
+        starContainer.removeAllViews();
+        for (int i = 0; i < cosmetic.getStar(); i++) {
             ImageView star = new ImageView(this);
-            LinearLayout starContainer = (LinearLayout) findViewById(id.star_container);
 
             star.setImageResource(drawable.star_icon);
             int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
@@ -122,4 +133,43 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     View.OnClickListener goBackPage = view -> DetailActivity.this.finish();
+
+    View.OnClickListener editCosmetic = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(DetailActivity.this, AddActivity.class);
+
+            intent.putExtra("editFlag", true);
+            intent.putExtra("itemId", itemId);
+            intent.putExtra("title", cosmetic.getTitle());
+            intent.putExtra("endDay", cosmetic.getEndDay());
+            intent.putExtra("starNum", cosmetic.getStar());
+            intent.putExtra("memo", cosmetic.getMemo());
+
+            startActivityForResult(intent, ADD_COSMETIC_REQUEST);
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_COSMETIC_REQUEST && resultCode == RESULT_OK) {
+            String title = data.getStringExtra(AddActivity.EXTRA_TITLE);
+            String endDay = data.getStringExtra(AddActivity.EXTRA_END_DAY);
+            int starNum = data.getIntExtra(AddActivity.EXTRA_STAR, 1);
+            String memo = data.getStringExtra(AddActivity.EXTRA_MEMO);
+            int itemId = data.getIntExtra(AddActivity.EXTRA_ITEM_ID, -1);
+
+            cosmetic = new Cosmetic(title, endDay, starNum, memo);
+            cosmetic.setId(itemId);
+            viewModel.update(cosmetic);
+
+            setScreen();
+
+            Toast.makeText(this, "제품이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "제품이 등록되지 않았습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
