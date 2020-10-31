@@ -1,24 +1,71 @@
 package com.ninecm.aa.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.ninecm.aa.AppDatabase;
 import com.ninecm.aa.Cosmetic;
 import com.ninecm.aa.ItemClickListener;
 import com.ninecm.aa.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> {
-    private List<Cosmetic> cosmetics;
+public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> implements Filterable {
+
+    private List<Cosmetic> cosmetics = new ArrayList<>();
+    private List<Cosmetic> getCosmeticsFiltered;
     private Activity searchActivity;
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults filterResults = new FilterResults();
+
+                if(charSequence == null || charSequence.length() == 0) {
+                    filterResults.count = getCosmeticsFiltered.size();
+                    filterResults.values = getCosmeticsFiltered;
+                } else {
+                    String searchChar = charSequence.toString().toLowerCase().trim();
+
+                    List<Cosmetic> resultData = new ArrayList<>();
+
+                    for(Cosmetic cosmetics : getCosmeticsFiltered) {
+                        if(cosmetics.getTitle().toLowerCase().contains(searchChar)) {
+                            resultData.add(cosmetics);
+                        }
+                    }
+
+                    filterResults.count = resultData.size();
+                    filterResults.values = resultData;
+                }
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                Log.d("Mytag", "publishResults");
+                cosmetics = (List<Cosmetic>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+
+        return filter;
+    }
 
     public static class SearchItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout searchItemContainer;
@@ -36,6 +83,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     public SearchItemAdapter(List<Cosmetic> cosmetics, Activity searchActivity) {
         this.cosmetics = cosmetics;
         this.searchActivity = searchActivity;
+        this.getCosmeticsFiltered = cosmetics;
     }
 
     @NonNull
