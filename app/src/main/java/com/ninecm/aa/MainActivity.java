@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -18,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.ninecm.aa.adapter.MainAdapterPager;
 
-public class MainActivity extends AppCompatActivity implements ViewModelStoreOwner {
+public class MainActivity extends AppCompatActivity {
     public static final int ADD_COSMETIC_REQUEST = 1;
 
     private MainAdapterPager adapterPager;
@@ -27,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements ViewModelStoreOwn
     private FloatingActionButton fab;
     private ImageButton btnSearch;
 
-    private ViewModelProvider.AndroidViewModelFactory viewModelFactory;
-    private ViewModelStore viewModelStore = new ViewModelStore();
     private MainViewModel viewModel;
 
     @Override
@@ -130,21 +126,8 @@ public class MainActivity extends AppCompatActivity implements ViewModelStoreOwn
     }
 
     public void setViewModel() {
-        if (viewModelFactory == null) {
-            viewModelFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication());
-        }
-        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModelStore.clear();
-    }
-
-    @NonNull
-    @Override
-    public ViewModelStore getViewModelStore() {
-        return viewModelStore;
+        viewModel = new ViewModelProvider(this,
+                new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
+                .get(MainViewModel.class);
     }
 }
