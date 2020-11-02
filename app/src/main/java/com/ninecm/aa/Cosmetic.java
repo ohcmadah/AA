@@ -16,6 +16,7 @@ public class Cosmetic implements Serializable {
     private String endDay;
     private int star;
     private String memo;
+    private boolean except;
 
     // Constructor
     public Cosmetic(String title, String endDay, int star, String memo) {
@@ -23,6 +24,7 @@ public class Cosmetic implements Serializable {
         this.endDay = endDay;
         this.star = star;
         this.memo = memo;
+        this.except = false;
     }
 
     // getter and setter
@@ -64,6 +66,14 @@ public class Cosmetic implements Serializable {
 
     public void setStar(int star) {
         this.star = star;
+    }
+
+    public boolean getExcept() {
+        return this.except;
+    }
+
+    public void setExcept(boolean except) {
+        this.except = except;
     }
 
     @NonNull
