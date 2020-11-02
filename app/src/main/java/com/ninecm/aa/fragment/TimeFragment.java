@@ -2,6 +2,7 @@ package com.ninecm.aa.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,6 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
 
         init(view);
 
-        emergTitle.setText("제품을 추가해주세요.");
-
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         timeItemAdapter = new TimeItemAdapter(mainActivity);
         // RecyclerView Manager를 LinearLayout으로 설정
@@ -65,11 +64,21 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         // 데이터베이스의 상태가 변경되면 자동으로 실행
         // 데이터베이스에서 Cosmetic List를 받아 Emergency 계산 후 Adapter에 전달함
         viewModel.getAll().observe(this, dbCosmetics -> {
-            calEmergency(dbCosmetics);
+            exceptCosmetic(dbCosmetics);
+            calEmergency();
             timeItemAdapter.setCosmetics(cosmeticList);
         });
 
         return view;
+    }
+
+    private void exceptCosmetic(List<Cosmetic> cosmetics) {
+        cosmeticList = cosmetics;
+        for (int i = 0; i < cosmeticList.size(); i++) {
+            if (cosmeticList.get(i).getExcept()) {
+                cosmeticList.remove(i);
+            }
+        }
     }
 
     public void init(View view) {
@@ -79,8 +88,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         emergDday = (TextView) view.findViewById(R.id.emerg_dday);
     }
 
-    public void calEmergency(List<Cosmetic> cosmetics) {
-        cosmeticList = cosmetics;
+    public void calEmergency() {
         /* emergency 계산 */
         int emergIndex = Calculator.getEmergIndex(cosmeticList);
 
@@ -108,6 +116,10 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
 
             // Emergency Card 클릭 Action Event
             emergContainer.setOnClickListener(new ItemClickListener(mainActivity, emergeId, startNum));
+        } else {
+            emergTitle.setText("제품을 추가해주세요.");
+            emergDday.setText("");
+            emergContainer.setOnClickListener(null);
         }
     }
 }
