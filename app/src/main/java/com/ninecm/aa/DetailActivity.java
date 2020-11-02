@@ -52,8 +52,12 @@ public class DetailActivity extends AppCompatActivity {
         setUp();
 
         Intent intent = getIntent();
-        itemId = intent.getExtras().getInt("itemId");
+        itemId = intent.getIntExtra("itemId", -1);
         cosmetic = viewModel.getById(itemId);
+
+        if (cosmetic.getExcept()) {
+            btnExceptTime.setChecked(true);
+        }
 
         setScreen();
 
@@ -98,6 +102,7 @@ public class DetailActivity extends AppCompatActivity {
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(MainViewModel.class);
         btnEdit.setOnClickListener(editCosmetic);
+        btnExceptTime.setOnClickListener(exceptTimePage);
     }
 
     private void setScreen() {
@@ -150,6 +155,18 @@ public class DetailActivity extends AppCompatActivity {
         }
     };
 
+    CheckBox.OnClickListener exceptTimePage = new CheckBox.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (btnExceptTime.isChecked()) {
+                cosmetic.setExcept(true);
+            } else {
+                cosmetic.setExcept(false);
+            }
+            viewModel.update(cosmetic);
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -157,7 +174,7 @@ public class DetailActivity extends AppCompatActivity {
         if (requestCode == ADD_COSMETIC_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddActivity.EXTRA_TITLE);
             String endDay = data.getStringExtra(AddActivity.EXTRA_END_DAY);
-            int starNum = data.getIntExtra(AddActivity.EXTRA_STAR, 1);
+            int starNum = data.getIntExtra(AddActivity.EXTRA_STAR, 0);
             String memo = data.getStringExtra(AddActivity.EXTRA_MEMO);
             int itemId = data.getIntExtra(AddActivity.EXTRA_ITEM_ID, -1);
 
