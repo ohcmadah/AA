@@ -1,15 +1,16 @@
 package com.ninecm.aa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.ninecm.aa.adapter.SearchItemAdapter;
@@ -20,11 +21,12 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchRecyclerView;
-    private List<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics = new ArrayList<>();
     private SearchItemAdapter searchItemAdapter;
     private TextView searchCancel;
-    private EditText searchEditText;
-    private String value="";
+
+    private SearchView searchView;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +35,11 @@ public class SearchActivity extends AppCompatActivity {
 
         init();
 
-        // 임의로 물품 생성 (나중엔 DB와 연결해 그 값으로 생성)
-        Cosmetic cosmetic = new Cosmetic("에뛰드 스킨", "20200823", 2, "없음");
-        Cosmetic cosmetic2 = new Cosmetic("아큐브 투명 렌즈", "20200823", 3, "없음");
-        cosmetics = new ArrayList<>();
-        cosmetics.add(cosmetic);
-        cosmetics.add(cosmetic2);
+        setUp();
+
+        viewModel.getAll().observe(this, dbCosmetics -> {
+            cosmetics = dbCosmetics;
+        });
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         searchItemAdapter = new SearchItemAdapter(cosmetics, this);
@@ -46,44 +47,59 @@ public class SearchActivity extends AppCompatActivity {
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // RecyclerView Adapter 설정
         searchRecyclerView.setAdapter(searchItemAdapter);
-
-        // 검색 취소 액션 리스너 등록
-        searchCancel.setOnClickListener(goBackPage);
-
-        //edittext 입력변화 이벤트 처리
-        searchEditText.addTextChangedListener(textWatcher);
     }
 
     private void init() {
         searchRecyclerView = (RecyclerView) findViewById(R.id.search_recyclerview);
         searchCancel = (TextView) findViewById(R.id.search_cancel);
-        searchEditText = (EditText) findViewById(R.id.search_edittext);
+        searchView = findViewById(R.id.search_view);
     }
 
-    View.OnClickListener goBackPage = new View.OnClickListener() {
-        public void onClick(View v) {
-            SearchActivity.this.finish();
-            overridePendingTransition(R.anim.anim_slide_out_left, R.anim.anim_slide_in_right);
+    private void setUp() {
+        searchCancel.setOnClickListener(goBackPage);        // 검색 취소 액션 리스너 등록
+        searchView.setOnClickListener(ClickAllArea);
+        searchView.setOnQueryTextListener(searchQuery);
+
+        viewModel = new ViewModelProvider(this,
+                new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
+                .get(MainViewModel.class);
+    }
+
+    View.OnClickListener goBackPage = v -> {
+        SearchActivity.this.finish();
+        overridePendingTransition(R.anim.anim_slide_out_left, R.anim.anim_slide_in_right);
+    };
+
+    View.OnClickListener ClickAllArea = v -> {
+        searchView.setIconified(false);
+    };
+
+    SearchView.OnQueryTextListener searchQuery = new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String s) {    //키보드에서 검색 버튼 누르면 호출
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            if (newText.equals("")) {
+                searchItemAdapter.setCosmetics(new ArrayList<>());
+            } else {
+                searchItemAdapter.setCosmetics(searchCosmetics(newText));
+            }
+            return true;
         }
     };
 
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            // 입력하기 전에
+    private List<Cosmetic> searchCosmetics(String text) {
+        List<Cosmetic> cosmeticList = new ArrayList<>();
+        for (Cosmetic cosmetic : cosmetics) {
+            String title = cosmetic.getTitle().replaceAll(" ", "").toLowerCase();
+            String search = text.replaceAll(" ", "").toLowerCase();
+            if (title.contains(search)) {
+                cosmeticList.add(cosmetic);
+            }
         }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            //입력되고 있을 때
-            value = searchEditText.getText().toString();
-            Log.d("태그", value);
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            // 입력이 끝났을 때
-        }
-    };
-
+        return cosmeticList;
+    }
 }

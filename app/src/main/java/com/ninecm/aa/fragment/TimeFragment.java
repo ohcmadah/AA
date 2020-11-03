@@ -77,6 +77,7 @@ public class TimeFragment extends Fragment implements ViewModelStoreOwner {
         for (int i = 0; i < cosmeticList.size(); i++) {
             if (cosmeticList.get(i).getExcept()) {
                 cosmeticList.remove(i);
+                i--;
             }
         }
     }
