@@ -74,17 +74,6 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setIconified(false);
     };
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id == R.id.search_view) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     SearchView.OnQueryTextListener searchQuery = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String s) {    //키보드에서 검색 버튼 누르면 호출
@@ -93,7 +82,11 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public boolean onQueryTextChange(String newText) {
-            searchItemAdapter.setCosmetics(searchCosmetics(newText));
+            if (newText.equals("")) {
+                searchItemAdapter.setCosmetics(new ArrayList<>());
+            } else {
+                searchItemAdapter.setCosmetics(searchCosmetics(newText));
+            }
             return true;
         }
     };
@@ -101,7 +94,9 @@ public class SearchActivity extends AppCompatActivity {
     private List<Cosmetic> searchCosmetics(String text) {
         List<Cosmetic> cosmeticList = new ArrayList<>();
         for (Cosmetic cosmetic : cosmetics) {
-            if (cosmetic.getTitle().contains(text)) {
+            String title = cosmetic.getTitle().replaceAll(" ", "").toLowerCase();
+            String search = text.replaceAll(" ", "").toLowerCase();
+            if (title.contains(search)) {
                 cosmeticList.add(cosmetic);
             }
         }
