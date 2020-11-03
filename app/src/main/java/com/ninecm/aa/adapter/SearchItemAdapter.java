@@ -20,52 +20,12 @@ import com.ninecm.aa.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> implements Filterable {
+public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.SearchItemViewHolder> {
 
     private List<Cosmetic> cosmetics = new ArrayList<>();
-    private List<Cosmetic> getCosmeticsFiltered;
     private Activity searchActivity;
 
-    @Override
-    public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                FilterResults filterResults = new FilterResults();
-
-                if(charSequence == null || charSequence.length() == 0) {
-                    filterResults.count = getCosmeticsFiltered.size();
-                    filterResults.values = getCosmeticsFiltered;
-                } else {
-                    String searchChar = charSequence.toString().toLowerCase().trim();
-
-                    List<Cosmetic> resultData = new ArrayList<>();
-
-                    for(Cosmetic cosmetics : getCosmeticsFiltered) {
-                        if(cosmetics.getTitle().toLowerCase().contains(searchChar)) {
-                            resultData.add(cosmetics);
-                        }
-                    }
-
-                    filterResults.count = resultData.size();
-                    filterResults.values = resultData;
-                }
-
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                Log.d("Mytag", "publishResults");
-                cosmetics = (List<Cosmetic>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-
-        return filter;
-    }
-
-    public static class SearchItemViewHolder extends RecyclerView.ViewHolder {
+    class SearchItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout searchItemContainer;
         TextView searchTitle;
 
@@ -81,7 +41,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     public SearchItemAdapter(List<Cosmetic> cosmetics, Activity searchActivity) {
         this.cosmetics = cosmetics;
         this.searchActivity = searchActivity;
-        this.getCosmeticsFiltered = cosmetics;
     }
 
     @NonNull
@@ -92,12 +51,19 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {// onClick event
-        holder.searchItemContainer.setOnClickListener(new ItemClickListener(searchActivity, 1, 3));
+    public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) { // onClick event
+        holder.searchItemContainer.setOnClickListener(new ItemClickListener(searchActivity, cosmetics.get(position).getId(), cosmetics.get(position).getStar()));
+        holder.searchTitle.setText(cosmetics.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
         return cosmetics.size();
+    }
+
+    public void setCosmetics(List<Cosmetic> cosmetics) {
+        this.cosmetics.clear();
+        this.cosmetics = cosmetics;
+        this.notifyDataSetChanged();
     }
 }
