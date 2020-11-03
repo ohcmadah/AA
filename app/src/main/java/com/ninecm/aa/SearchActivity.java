@@ -21,7 +21,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView searchRecyclerView;
-    private List<Cosmetic> cosmetics;
+    private List<Cosmetic> cosmetics = new ArrayList<>();
     private SearchItemAdapter searchItemAdapter;
     private TextView searchCancel;
 
@@ -34,13 +34,12 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         init();
+
         setUp();
 
-        cosmetics = new ArrayList<>();
-
-        viewModel = new ViewModelProvider(this,
-                new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
-                .get(MainViewModel.class);
+        viewModel.getAll().observe(this, dbCosmetics -> {
+            cosmetics = dbCosmetics;
+        });
 
         // RecyclerView Adapter 생성 및 Cosmetic List 전달
         searchItemAdapter = new SearchItemAdapter(cosmetics, this);
@@ -60,6 +59,10 @@ public class SearchActivity extends AppCompatActivity {
         searchCancel.setOnClickListener(goBackPage);        // 검색 취소 액션 리스너 등록
         searchView.setOnClickListener(ClickAllArea);
         searchView.setOnQueryTextListener(searchQuery);
+
+        viewModel = new ViewModelProvider(this,
+                new ViewModelProvider.AndroidViewModelFactory(this.getApplication()))
+                .get(MainViewModel.class);
     }
 
     View.OnClickListener goBackPage = v -> {
@@ -71,16 +74,16 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setIconified(false);
     };
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.search_view) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if(id == R.id.search_view) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     SearchView.OnQueryTextListener searchQuery = new SearchView.OnQueryTextListener() {
         @Override
@@ -90,11 +93,18 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public boolean onQueryTextChange(String newText) {
-            viewModel.getAll().observe(SearchActivity.this, dbCosmetics -> {
-                Log.d("Mytag", newText);
-                searchItemAdapter.getFilter().filter(newText);
-            });
+            searchItemAdapter.setCosmetics(searchCosmetics(newText));
             return true;
         }
     };
+
+    private List<Cosmetic> searchCosmetics(String text) {
+        List<Cosmetic> cosmeticList = new ArrayList<>();
+        for (Cosmetic cosmetic : cosmetics) {
+            if (cosmetic.getTitle().contains(text)) {
+                cosmeticList.add(cosmetic);
+            }
+        }
+        return cosmeticList;
+    }
 }
