@@ -3,7 +3,6 @@ package com.ninecm.aa;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,7 +90,6 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public boolean onQueryTextChange(String newText) {
-            Log.d("Mytag", newText);
             viewModel.getAll().observe(SearchActivity.this, dbCosmetics -> {
                 Log.d("Mytag", newText);
                 searchItemAdapter.getFilter().filter(newText);
